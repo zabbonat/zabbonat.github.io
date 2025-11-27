@@ -17,11 +17,11 @@ const WorldMap = ({ onNavigate }) => {
     // - Library (Publications): More to the right
     // - Tavern (About): Left/Center (Assumed remaining spot)
     const zones = [
-        { id: 'about', name: 'The Tavern', desc: '(About Me)', x: 42, y: 42, radius: 25 },
-        { id: 'research', name: 'Alchemist Lab', desc: '(Research)', x: 70, y: 25, radius: 25 },
-        { id: 'publications', name: 'The Library', desc: '(Publications)', x: 36, y: 63, radius: 25 },
-        { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 35, y: 15, radius: 25 },
-        { id: 'teaching', name: 'The Academy', desc: '(Teaching)', x: 67, y: 65, radius: 25 },
+        { id: 'about', name: 'The Tavern', desc: '(About Me)', x: 42, y: 42, radius: 10 },
+        { id: 'research', name: 'Alchemist Lab', desc: '(Research)', x: 70, y: 25, radius: 10 },
+        { id: 'publications', name: 'The Library', desc: '(Publications)', x: 36, y: 63, radius: 10 },
+        { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 35, y: 15, radius: 10 },
+        { id: 'teaching', name: 'The Academy', desc: '(Teaching)', x: 67, y: 65, radius: 10 },
     ];
 
     // Movement speed
@@ -210,7 +210,7 @@ const WorldMap = ({ onNavigate }) => {
                 <img
                     src="/me_rpg.png"
                     alt="Player"
-                    className={`w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-2xl transition-transform ${direction === 'left' ? 'scale-x-[-1]' : ''}`}
+                    className={`w-44 h-44 md:w-52 md:h-52 object-contain drop-shadow-2xl transition-transform ${direction === 'left' ? 'scale-x-[-1]' : ''}`}
                 />
                 <div className="bg-black/50 px-3 py-1 rounded-full mt-[-10px]">
                     <span className="font-pixel text-xs text-white">You (Lvl 31)</span>
