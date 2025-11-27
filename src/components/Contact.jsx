@@ -30,28 +30,28 @@ const Contact = () => {
 
                         <div className="space-y-6">
                             <a href="mailto:diletta.abbonato@unito.it" className="flex items-center gap-4 text-slate-300 hover:text-accent transition-colors group">
-                                <div className="p-3 bg-slate-800 rounded-lg group-hover:bg-slate-700 transition-colors">
+                                <div className="p-3 bg-secondary/50 rounded-lg group-hover:bg-secondary transition-colors">
                                     <Mail size={24} />
                                 </div>
                                 <span className="text-lg">diletta.abbonato@unito.it</span>
                             </a>
 
                             <a href="https://www.linkedin.com/in/dilettaabbonato/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-slate-300 hover:text-accent transition-colors group">
-                                <div className="p-3 bg-slate-800 rounded-lg group-hover:bg-slate-700 transition-colors">
+                                <div className="p-3 bg-secondary/50 rounded-lg group-hover:bg-secondary transition-colors">
                                     <Linkedin size={24} />
                                 </div>
                                 <span className="text-lg">LinkedIn Profile</span>
                             </a>
 
                             <a href="https://github.com/zabbonat" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-slate-300 hover:text-accent transition-colors group">
-                                <div className="p-3 bg-slate-800 rounded-lg group-hover:bg-slate-700 transition-colors">
+                                <div className="p-3 bg-secondary/50 rounded-lg group-hover:bg-secondary transition-colors">
                                     <Github size={24} />
                                 </div>
                                 <span className="text-lg">GitHub Profile</span>
                             </a>
 
                             <div className="flex items-center gap-4 text-slate-300">
-                                <div className="p-3 bg-slate-800 rounded-lg">
+                                <div className="p-3 bg-secondary/50 rounded-lg">
                                     <MapPin size={24} />
                                 </div>
                                 <span className="text-lg">Turin, Italy</span>
@@ -64,7 +64,7 @@ const Contact = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="bg-slate-800/30 p-8 rounded-2xl border border-slate-700"
+                        className="bg-secondary/30 p-8 rounded-2xl border border-emerald-800/50"
                     >
                         <form className="space-y-6">
                             <div>
@@ -72,7 +72,7 @@ const Contact = () => {
                                 <input
                                     type="text"
                                     id="name"
-                                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:outline-none focus:border-accent text-white placeholder-slate-500 transition-colors"
+                                    className="w-full px-4 py-3 bg-primary/50 border border-emerald-800/50 rounded-lg focus:outline-none focus:border-accent text-white placeholder-slate-500 transition-colors"
                                     placeholder="Your Name"
                                 />
                             </div>
@@ -81,7 +81,7 @@ const Contact = () => {
                                 <input
                                     type="email"
                                     id="email"
-                                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:outline-none focus:border-accent text-white placeholder-slate-500 transition-colors"
+                                    className="w-full px-4 py-3 bg-primary/50 border border-emerald-800/50 rounded-lg focus:outline-none focus:border-accent text-white placeholder-slate-500 transition-colors"
                                     placeholder="your@email.com"
                                 />
                             </div>
@@ -90,7 +90,7 @@ const Contact = () => {
                                 <textarea
                                     id="message"
                                     rows="4"
-                                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:outline-none focus:border-accent text-white placeholder-slate-500 transition-colors resize-none"
+                                    className="w-full px-4 py-3 bg-primary/50 border border-emerald-800/50 rounded-lg focus:outline-none focus:border-accent text-white placeholder-slate-500 transition-colors resize-none"
                                     placeholder="Your message..."
                                 ></textarea>
                             </div>

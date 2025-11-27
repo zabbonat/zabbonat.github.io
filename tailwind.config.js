@@ -7,9 +7,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#0f172a', // Slate 900
-        secondary: '#334155', // Slate 700
-        accent: '#38bdf8', // Sky 400
+        primary: '#022c22', // Emerald 950
+        secondary: '#065f46', // Emerald 800
+        accent: '#10b981', // Emerald 500
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],

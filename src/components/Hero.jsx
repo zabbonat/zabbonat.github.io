@@ -7,7 +7,7 @@ const Hero = () => {
             {/* Background Elements */}
             <div className="absolute inset-0 overflow-hidden">
                 <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] bg-accent/10 rounded-full blur-3xl animate-pulse" />
-                <div className="absolute top-[40%] -right-[10%] w-[40%] h-[40%] bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
+                <div className="absolute top-[40%] -right-[10%] w-[40%] h-[40%] bg-emerald-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
             </div>
 
             <div className="z-10 text-center px-4">
@@ -35,8 +35,7 @@ const Hero = () => {
                     transition={{ duration: 0.8, delay: 0.4 }}
                     className="text-slate-400 max-w-2xl mx-auto text-lg mb-12"
                 >
-                    Exploring the frontiers of science with passion and precision.
-                    Specializing in [Your Specific Field].
+                    Specializing in Artificial Intelligence & Economics.
                 </motion.p>
 
                 <motion.div

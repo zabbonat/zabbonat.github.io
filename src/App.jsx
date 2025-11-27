@@ -27,7 +27,7 @@ function App() {
 
   if (isClassicMode) {
     return (
-      <div className="bg-slate-900 min-h-screen text-white font-sans">
+      <div className="bg-primary min-h-screen text-white font-sans">
         <Navbar />
         <Hero />
         <About />
