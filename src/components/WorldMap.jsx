@@ -18,9 +18,9 @@ const WorldMap = ({ onNavigate }) => {
     // - Tavern (About): Left/Center (Assumed remaining spot)
     const zones = [
         { id: 'about', name: 'The Tavern', desc: '(About Me)', x: 42, y: 42, radius: 25 },
-        { id: 'research', name: 'Alchemist Lab', desc: '(Research)', x: 75, y: 25, radius: 25 },
-        { id: 'publications', name: 'The Library', desc: '(Publications)', x: 25, y: 65, radius: 25 },
-        { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 20, y: 25, radius: 25 },
+        { id: 'research', name: 'Alchemist Lab', desc: '(Research)', x: 70, y: 25, radius: 25 },
+        { id: 'publications', name: 'The Library', desc: '(Publications)', x: 30, y: 65, radius: 25 },
+        { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 25, y: 25, radius: 25 },
         { id: 'teaching', name: 'The Academy', desc: '(Teaching)', x: 70, y: 65, radius: 25 },
     ];
 
