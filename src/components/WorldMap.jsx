@@ -2,10 +2,10 @@ import { motion } from 'framer-motion';
 
 const WorldMap = ({ onNavigate }) => {
     const zones = [
-        { id: 'about', name: 'The Tavern', top: '60%', left: '20%', color: 'bg-orange-500/30' },
-        { id: 'research', name: 'Alchemist Lab', top: '30%', left: '70%', color: 'bg-purple-500/30' },
-        { id: 'publications', name: 'The Library', top: '20%', left: '30%', color: 'bg-blue-500/30' },
-        { id: 'cv', name: 'Archives', top: '70%', left: '70%', color: 'bg-yellow-500/30' },
+        { id: 'about', name: 'The Tavern', desc: '(About Me)', top: '60%', left: '20%', color: 'bg-orange-500/30' },
+        { id: 'research', name: 'Alchemist Lab', desc: '(Research)', top: '30%', left: '70%', color: 'bg-purple-500/30' },
+        { id: 'publications', name: 'The Library', desc: '(Publications)', top: '20%', left: '30%', color: 'bg-blue-500/30' },
+        { id: 'cv', name: 'Archives', desc: '(CV & Resume)', top: '70%', left: '70%', color: 'bg-yellow-500/30' },
     ];
 
     return (
@@ -36,9 +36,14 @@ const WorldMap = ({ onNavigate }) => {
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                 >
-                    <span className="font-pixel text-xs md:text-sm text-white text-center drop-shadow-md opacity-0 group-hover:opacity-100 transition-opacity bg-black/50 p-2 rounded">
-                        {zone.name}
-                    </span>
+                    <div className="flex flex-col items-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/60 p-2 rounded backdrop-blur-sm">
+                        <span className="font-pixel text-xs md:text-sm text-white text-center drop-shadow-md">
+                            {zone.name}
+                        </span>
+                        <span className="font-pixel text-[10px] text-yellow-300 mt-1">
+                            {zone.desc}
+                        </span>
+                    </div>
                 </motion.button>
             ))}
         </div>

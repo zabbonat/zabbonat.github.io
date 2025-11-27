@@ -7,9 +7,12 @@ import About from './components/About';
 import CV from './components/CV';
 // Reuse existing components for now, we will restyle them later
 import Contact from './components/Contact';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
 
 function App() {
   const [currentView, setCurrentView] = useState('map');
+  const [isClassicMode, setIsClassicMode] = useState(false);
 
   const renderView = () => {
     switch (currentView) {
@@ -21,11 +24,32 @@ function App() {
     }
   };
 
+  if (isClassicMode) {
+    return (
+      <div className="bg-primary min-h-screen text-white font-sans">
+        <Navbar />
+        <Hero />
+        <About />
+        <CV />
+        <Contact />
+        <button
+          onClick={() => setIsClassicMode(false)}
+          className="fixed bottom-4 right-4 z-50 px-4 py-2 bg-accent text-primary font-bold rounded shadow-lg hover:bg-accent/90 transition-colors"
+        >
+          Switch to RPG Mode
+        </button>
+        <footer className="py-8 text-center text-slate-500 text-sm bg-slate-900 border-t border-slate-800">
+          <p>© {new Date().getFullYear()} Diletta Abbonato. All rights reserved.</p>
+        </footer>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-primary min-h-screen text-white font-sans">
       <GameUI
         onInventoryClick={() => setCurrentView('cv')}
-        onSettingsClick={() => alert('Settings menu coming soon!')}
+        onSettingsClick={() => setIsClassicMode(true)}
       />
 
       <AnimatePresence mode="wait">
