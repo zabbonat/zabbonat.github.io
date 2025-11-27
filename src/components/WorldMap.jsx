@@ -18,6 +18,7 @@ const WorldMap = ({ onNavigate }) => {
         { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 34.5, y: 15, radius: 10 },
         { id: 'teaching', name: 'The Academy', desc: '(Teaching)', x: 66.5, y: 65, radius: 10 },
         { id: 'classic-mode', name: 'Classical View', desc: '(Exit RPG Mode)', x: 94, y: 20, radius: 20 },
+        { id: 'easter-egg', name: 'Easter Egg', desc: '(Tenure Road)', x: 10, y: 36, radius: 10, hidden: true },
     ];
 
     // Movement speed
@@ -32,7 +33,11 @@ const WorldMap = ({ onNavigate }) => {
 
             if (e.key === 'Enter') {
                 if (activeZone) {
-                    onNavigate(activeZone.id);
+                    if (activeZone.id === 'easter-egg') {
+                        setShowGame(true);
+                    } else {
+                        onNavigate(activeZone.id);
+                    }
                 }
                 return;
             }
@@ -207,14 +212,16 @@ const WorldMap = ({ onNavigate }) => {
                     }}
                 >
                     {/* Always visible label */}
-                    <div className="bg-black/60 p-2 rounded border border-white/10 backdrop-blur-sm">
-                        <p className="font-pixel text-sm text-white text-center whitespace-nowrap drop-shadow-md">
-                            {zone.name}
-                        </p>
-                        <p className="font-pixel text-[10px] text-yellow-300 text-center mt-1">
-                            {zone.desc}
-                        </p>
-                    </div>
+                    {!zone.hidden && (
+                        <div className="bg-black/60 p-2 rounded border border-white/10 backdrop-blur-sm">
+                            <p className="font-pixel text-sm text-white text-center whitespace-nowrap drop-shadow-md">
+                                {zone.name}
+                            </p>
+                            <p className="font-pixel text-[10px] text-yellow-300 text-center mt-1">
+                                {zone.desc}
+                            </p>
+                        </div>
+                    )}
                 </div>
             ))}
 
@@ -238,9 +245,6 @@ const WorldMap = ({ onNavigate }) => {
                     alt="Player"
                     className={`w-44 h-44 md:w-52 md:h-52 object-contain drop-shadow-2xl transition-transform ${direction === 'left' ? 'scale-x-[-1]' : ''}`}
                 />
-                <div className="bg-black/50 px-3 py-1 rounded-full mt-[-10px]">
-                    <span className="font-pixel text-xs text-white">You (Lvl 31)</span>
-                </div>
             </motion.div>
         </div>
     );
