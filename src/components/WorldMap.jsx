@@ -9,18 +9,19 @@ const WorldMap = ({ onNavigate }) => {
     const [isMoving, setIsMoving] = useState(false);
     const [activeZone, setActiveZone] = useState(null);
 
-    // Zones mapped to user's 'world_map169.png'
-    // "la casetta è l about me" (Center)
-    // "la torre sono cv" (Bottom Right)
-    // "il laboratoroio e l archimista research" (Top Left)
-    // "la scuola con abv è il teching" (Right Side)
-    // "The Library" (Publications) - Assumed Bottom Left
+    // Zones mapped to user's 'world_map_clean.png'
+    // Coordinates adjusted based on user feedback:
+    // - Tower (Archives/CV): Upper Left
+    // - Alchemist Lab (Research): Right (Laboratory picture)
+    // - School (Teaching): Below Right (House with ABC)
+    // - Library (Publications): More to the right
+    // - Tavern (About): Left/Center (Assumed remaining spot)
     const zones = [
-        { id: 'about', name: 'The House', desc: '(About Me)', x: 50, y: 50, radius: 15 }, // Center
-        { id: 'research', name: 'Alchemist Lab', desc: '(Research)', x: 20, y: 25, radius: 15 }, // Top Left
-        { id: 'publications', name: 'The Library', desc: '(Publications)', x: 20, y: 75, radius: 15 }, // Bottom Left
-        { id: 'cv', name: 'The Tower', desc: '(CV & Resume)', x: 85, y: 75, radius: 15 }, // Bottom Right
-        { id: 'teaching', name: 'The School', desc: '(Teaching)', x: 85, y: 35, radius: 15 }, // Right Side (Higher up)
+        { id: 'about', name: 'The Tavern', desc: '(About Me)', x: 20, y: 60, radius: 25 },
+        { id: 'research', name: 'Alchemist Lab', desc: '(Research)', x: 85, y: 30, radius: 25 },
+        { id: 'publications', name: 'The Library', desc: '(Publications)', x: 60, y: 25, radius: 25 },
+        { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 15, y: 20, radius: 25 },
+        { id: 'teaching', name: 'The Academy', desc: '(Teaching)', x: 80, y: 75, radius: 25 },
     ];
 
     // Movement speed
@@ -107,7 +108,7 @@ const WorldMap = ({ onNavigate }) => {
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                 style={{
-                    backgroundImage: "url('/world_map169.png')",
+                    backgroundImage: "url('/world_map_clean.png')",
                     imageRendering: 'pixelated'
                 }}
             />
@@ -158,8 +159,8 @@ const WorldMap = ({ onNavigate }) => {
                     style={{
                         top: `${zone.y}%`,
                         left: `${zone.x}%`,
-                        width: '180px',
-                        height: '180px',
+                        width: '250px', // Large hit area
+                        height: '250px',
                         transform: 'translate(-50%, -50%)',
                         backgroundColor: 'transparent'
                     }}
