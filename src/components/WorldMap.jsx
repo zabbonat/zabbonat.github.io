@@ -22,7 +22,7 @@ const WorldMap = ({ onNavigate }) => {
         { id: 'publications', name: 'The Library', desc: '(Publications)', x: 36, y: 63, radius: 10 },
         { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 35, y: 15, radius: 10 },
         { id: 'teaching', name: 'The Academy', desc: '(Teaching)', x: 67, y: 65, radius: 10 },
-        { id: 'classic-mode', name: 'Classical View', desc: '(Exit RPG Mode)', x: 96, y: 20, radius: 10, small: true },
+        { id: 'classic-mode', name: 'Classical View', desc: '(Exit RPG Mode)', x: 94, y: 35, radius: 10 },
     ];
 
     // Movement speed
@@ -167,11 +167,11 @@ const WorldMap = ({ onNavigate }) => {
                     }}
                 >
                     {/* Always visible label */}
-                    <div className={`bg-black/60 rounded border border-white/10 backdrop-blur-sm ${zone.small ? 'p-1' : 'p-2'}`}>
-                        <p className={`font-pixel text-white text-center whitespace-nowrap drop-shadow-md ${zone.small ? 'text-[10px]' : 'text-sm'}`}>
+                    <div className="bg-black/60 p-2 rounded border border-white/10 backdrop-blur-sm">
+                        <p className="font-pixel text-sm text-white text-center whitespace-nowrap drop-shadow-md">
                             {zone.name}
                         </p>
-                        <p className={`font-pixel text-yellow-300 text-center mt-1 ${zone.small ? 'text-[8px]' : 'text-[10px]'}`}>
+                        <p className="font-pixel text-[10px] text-yellow-300 text-center mt-1">
                             {zone.desc}
                         </p>
                     </div>
