@@ -55,11 +55,14 @@ function App() {
     );
   }
 
+  const hp = currentView === 'publications' ? 50 : 100;
+
   return (
     <div className="bg-primary min-h-screen text-white font-sans">
       <GameUI
         onInventoryClick={() => setCurrentView('cv')}
         onSettingsClick={() => setIsClassicMode(true)}
+        hp={hp}
       />
 
       <AnimatePresence mode="wait">

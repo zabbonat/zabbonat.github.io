@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Heart, Backpack, Settings } from 'lucide-react';
 
-const GameUI = ({ onInventoryClick, onSettingsClick }) => {
+const GameUI = ({ onInventoryClick, onSettingsClick, hp = 100 }) => {
     return (
         <div className="fixed top-0 left-0 w-full pointer-events-none z-40 p-4 flex justify-between items-start">
             {/* Player Stats */}
@@ -13,7 +13,7 @@ const GameUI = ({ onInventoryClick, onSettingsClick }) => {
                     <div className="w-32 h-4 bg-slate-700 rounded overflow-hidden">
                         <motion.div
                             initial={{ width: 0 }}
-                            animate={{ width: '100%' }}
+                            animate={{ width: `${hp}%` }}
                             transition={{ duration: 1, delay: 0.5 }}
                             className="h-full bg-red-500"
                         />

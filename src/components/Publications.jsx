@@ -110,7 +110,7 @@ const Publications = () => {
 
                 <div className="mt-12 text-center">
                     <div className="flex justify-center gap-4">
-                        <a href="https://scholar.google.com/" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-slate-800 rounded hover:bg-slate-700 text-white transition-colors border border-slate-600">
+                        <a href="https://scholar.google.com/citations?user=no8pRaUAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-slate-800 rounded hover:bg-slate-700 text-white transition-colors border border-slate-600">
                             Google Scholar
                         </a>
                     </div>
