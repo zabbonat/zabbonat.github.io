@@ -13,6 +13,7 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
+        pixel: ['"Press Start 2P"', 'cursive'],
       },
     },
   },

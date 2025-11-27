@@ -1,36 +1,35 @@
 import { motion } from 'framer-motion';
-import { FileText, Download, ExternalLink } from 'lucide-react';
+import { FileText, Download, ExternalLink, Sword, Shield, Scroll } from 'lucide-react';
 
 const CV = () => {
     return (
-        <section id="cv" className="py-20 bg-secondary/30 relative">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="cv" className="min-h-screen p-8 flex items-center justify-center">
+            <div className="max-w-5xl w-full">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                     className="text-center mb-12"
                 >
-                    <h2 className="text-3xl md:text-4xl font-bold mb-4">Curriculum Vitae</h2>
-                    <div className="w-20 h-1 bg-accent mx-auto rounded-full" />
+                    <h2 className="font-pixel text-3xl md:text-5xl text-yellow-500 mb-4 drop-shadow-md">The Archives</h2>
+                    <p className="font-pixel text-xs md:text-sm text-slate-400">Inspect your inventory and collected scrolls.</p>
                 </motion.div>
 
                 <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
+                    animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5 }}
-                    className="max-w-4xl mx-auto bg-slate-800/50 rounded-2xl p-8 border border-slate-700 backdrop-blur-sm"
+                    className="bg-slate-800/90 rounded-lg border-4 border-slate-600 p-8 shadow-2xl"
                 >
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+                    {/* Inventory Grid Header */}
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-8 border-b-2 border-slate-700 pb-8">
                         <div className="flex items-center gap-6">
-                            <div className="p-4 bg-accent/10 rounded-full text-accent">
-                                <FileText size={40} />
+                            <div className="w-16 h-16 bg-slate-900 border-2 border-yellow-600 rounded flex items-center justify-center">
+                                <Scroll size={32} className="text-yellow-500" />
                             </div>
                             <div>
-                                <h3 className="text-xl font-semibold text-white">Full CV</h3>
-                                <p className="text-slate-400">View or download my complete resume</p>
+                                <h3 className="font-pixel text-lg text-white mb-2">Master Scroll (CV)</h3>
+                                <p className="font-sans text-slate-400 text-sm">Level 50 Item. Contains full career history.</p>
                             </div>
                         </div>
 
@@ -39,45 +38,73 @@ const CV = () => {
                                 href="/cv_ABBONATO_Diletta_update1025.pdf"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-2 px-6 py-3 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors font-medium"
+                                className="flex items-center gap-2 px-4 py-2 bg-slate-700 border-2 border-slate-500 hover:border-white text-white font-pixel text-xs rounded transition-all"
                             >
-                                <ExternalLink size={18} />
-                                View
+                                <ExternalLink size={14} />
+                                Inspect
                             </a>
                             <a
                                 href="/cv_ABBONATO_Diletta_update1025.pdf"
                                 download
-                                className="flex items-center gap-2 px-6 py-3 bg-accent text-primary hover:bg-accent/90 rounded-lg transition-colors font-bold"
+                                className="flex items-center gap-2 px-4 py-2 bg-yellow-600 border-2 border-yellow-400 hover:bg-yellow-500 text-white font-pixel text-xs rounded transition-all shadow-[0_4px_0_rgb(161,98,7)] hover:shadow-[0_2px_0_rgb(161,98,7)] hover:translate-y-[2px]"
                             >
-                                <Download size={18} />
-                                Download PDF
+                                <Download size={14} />
+                                Loot PDF
                             </a>
                         </div>
                     </div>
 
-                    {/* Optional: Preview or Key Highlights */}
-                    <div className="mt-12 grid md:grid-cols-3 gap-6 border-t border-slate-700 pt-8">
-                        <div>
-                            <h4 className="text-accent font-semibold mb-2">Education</h4>
-                            <ul className="text-slate-300 text-sm space-y-2">
-                                <li>• Ph.D. in [Subject]</li>
-                                <li>• M.Sc. in [Subject]</li>
+                    {/* Inventory Slots */}
+                    <div className="grid md:grid-cols-3 gap-6">
+                        {/* Slot 1: Education */}
+                        <div className="bg-slate-900 p-4 rounded border-2 border-slate-700 hover:border-blue-500 transition-colors group">
+                            <div className="flex items-center gap-3 mb-3">
+                                <Sword size={20} className="text-blue-500" />
+                                <h4 className="font-pixel text-sm text-blue-400">Education Tree</h4>
+                            </div>
+                            <ul className="space-y-3 font-sans text-sm text-slate-300">
+                                <li className="flex items-start gap-2">
+                                    <span className="text-blue-500 mt-1">►</span>
+                                    <span>Ph.D. in [Subject] <span className="text-xs text-slate-500 block">Mastery Level</span></span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span className="text-blue-500 mt-1">►</span>
+                                    <span>M.Sc. in [Subject] <span className="text-xs text-slate-500 block">Advanced Skill</span></span>
+                                </li>
                             </ul>
                         </div>
-                        <div>
-                            <h4 className="text-accent font-semibold mb-2">Experience</h4>
-                            <ul className="text-slate-300 text-sm space-y-2">
-                                <li>• Postdoc at [Institution]</li>
-                                <li>• Researcher at [Lab]</li>
+
+                        {/* Slot 2: Experience */}
+                        <div className="bg-slate-900 p-4 rounded border-2 border-slate-700 hover:border-green-500 transition-colors group">
+                            <div className="flex items-center gap-3 mb-3">
+                                <Shield size={20} className="text-green-500" />
+                                <h4 className="font-pixel text-sm text-green-400">Quest History</h4>
+                            </div>
+                            <ul className="space-y-3 font-sans text-sm text-slate-300">
+                                <li className="flex items-start gap-2">
+                                    <span className="text-green-500 mt-1">►</span>
+                                    <span>Postdoc at [Institution] <span className="text-xs text-slate-500 block">Current Quest</span></span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span className="text-green-500 mt-1">►</span>
+                                    <span>Researcher at [Lab] <span className="text-xs text-slate-500 block">Completed</span></span>
+                                </li>
                             </ul>
                         </div>
-                        <div>
-                            <h4 className="text-accent font-semibold mb-2">Skills</h4>
-                            <ul className="text-slate-300 text-sm space-y-2">
-                                <li>• [Skill 1]</li>
-                                <li>• [Skill 2]</li>
-                                <li>• [Skill 3]</li>
-                            </ul>
+
+                        {/* Slot 3: Skills */}
+                        <div className="bg-slate-900 p-4 rounded border-2 border-slate-700 hover:border-purple-500 transition-colors group">
+                            <div className="flex items-center gap-3 mb-3">
+                                <Zap size={20} className="text-purple-500" />
+                                <h4 className="font-pixel text-sm text-purple-400">Abilities</h4>
+                            </div>
+                            <div className="flex flex-wrap gap-2">
+                                {['Python', 'React', 'Data Analysis', 'Research', 'Writing'].map((skill) => (
+                                    <span key={skill} className="px-2 py-1 bg-slate-800 border border-slate-600 rounded text-xs text-purple-300 font-pixel">
+                                        {skill}
+                                    </span>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </motion.div>
