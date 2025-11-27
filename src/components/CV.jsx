@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FileText, Download, ExternalLink, Sword, Shield, Scroll } from 'lucide-react';
+import { FileText, Download, ExternalLink, Sword, Shield, Scroll, Zap } from 'lucide-react';
 
 const CV = () => {
     return (
@@ -29,7 +29,7 @@ const CV = () => {
                             </div>
                             <div>
                                 <h3 className="font-pixel text-lg text-white mb-2">Master Scroll (CV)</h3>
-                                <p className="font-sans text-slate-400 text-sm">Level 50 Item. Contains full career history.</p>
+                                <p className="font-sans text-slate-400 text-sm">Level 30 Item. Contains full career history.</p>
                             </div>
                         </div>
 
@@ -65,11 +65,15 @@ const CV = () => {
                             <ul className="space-y-3 font-sans text-sm text-slate-300">
                                 <li className="flex items-start gap-2">
                                     <span className="text-blue-500 mt-1">►</span>
-                                    <span>Ph.D. in [Subject] <span className="text-xs text-slate-500 block">Mastery Level</span></span>
+                                    <span>Ph.D. in Economics <span className="text-xs text-slate-500 block">Univ. of Strasbourg (2020-2024)</span></span>
                                 </li>
                                 <li className="flex items-start gap-2">
                                     <span className="text-blue-500 mt-1">►</span>
-                                    <span>M.Sc. in [Subject] <span className="text-xs text-slate-500 block">Advanced Skill</span></span>
+                                    <span>M.Sc. in Data Science <span className="text-xs text-slate-500 block">Sapienza Univ. of Rome (2018-2020)</span></span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span className="text-blue-500 mt-1">►</span>
+                                    <span>B.Sc. in Statistics <span className="text-xs text-slate-500 block">Sapienza Univ. of Rome (2015-2018)</span></span>
                                 </li>
                             </ul>
                         </div>
@@ -83,11 +87,15 @@ const CV = () => {
                             <ul className="space-y-3 font-sans text-sm text-slate-300">
                                 <li className="flex items-start gap-2">
                                     <span className="text-green-500 mt-1">►</span>
-                                    <span>Postdoc at [Institution] <span className="text-xs text-slate-500 block">Current Quest</span></span>
+                                    <span>Postdoc Researcher <span className="text-xs text-slate-500 block">Univ. of Turin (Current)</span></span>
                                 </li>
                                 <li className="flex items-start gap-2">
                                     <span className="text-green-500 mt-1">►</span>
-                                    <span>Researcher at [Lab] <span className="text-xs text-slate-500 block">Completed</span></span>
+                                    <span>Postdoc Researcher <span className="text-xs text-slate-500 block">Univ. of Milan-Bicocca (2024-2025)</span></span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span className="text-green-500 mt-1">►</span>
+                                    <span>Visiting Researcher <span className="text-xs text-slate-500 block">Univ. of Bremen (2023)</span></span>
                                 </li>
                             </ul>
                         </div>
@@ -99,7 +107,7 @@ const CV = () => {
                                 <h4 className="font-pixel text-sm text-purple-400">Abilities</h4>
                             </div>
                             <div className="flex flex-wrap gap-2">
-                                {['Python', 'React', 'Data Analysis', 'Research', 'Writing'].map((skill) => (
+                                {['R', 'Python', 'SAS', 'Java', 'C++', 'MATLAB', 'SQL', 'Gephi', 'Docker', 'Git', 'LaTeX', 'Torch', 'Tensorflow'].map((skill) => (
                                     <span key={skill} className="px-2 py-1 bg-slate-800 border border-slate-600 rounded text-xs text-purple-300 font-pixel">
                                         {skill}
                                     </span>

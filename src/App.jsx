@@ -5,7 +5,8 @@ import WorldMap from './components/WorldMap';
 import GameUI from './components/GameUI';
 import About from './components/About';
 import CV from './components/CV';
-// Reuse existing components for now, we will restyle them later
+import Publications from './components/Publications';
+import Research from './components/Research';
 import Contact from './components/Contact';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -17,8 +18,8 @@ function App() {
   const renderView = () => {
     switch (currentView) {
       case 'about': return <About />;
-      case 'research': return <div className="h-screen flex items-center justify-center text-white font-pixel">Research Lab Under Construction</div>; // Placeholder
-      case 'publications': return <div className="h-screen flex items-center justify-center text-white font-pixel">Library Under Construction</div>; // Placeholder
+      case 'research': return <Research />;
+      case 'publications': return <Publications />;
       case 'cv': return <CV />;
       default: return null;
     }

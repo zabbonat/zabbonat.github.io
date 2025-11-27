@@ -22,10 +22,11 @@ const About = () => {
                         className="relative"
                     >
                         <div className="aspect-square rounded-lg overflow-hidden border-4 border-slate-600 bg-slate-900 relative">
-                            {/* Placeholder for profile image */}
-                            <div className="w-full h-full flex items-center justify-center text-slate-500 font-pixel text-xs text-center p-4">
-                                [Profile Image Placeholder]
-                            </div>
+                            <img
+                                src="/citations.jpg"
+                                alt="Diletta Abbonato"
+                                className="w-full h-full object-cover"
+                            />
                             <div className="absolute inset-0 border-4 border-yellow-500/20 pointer-events-none" />
                         </div>
 
@@ -35,11 +36,11 @@ const About = () => {
                             <div className="space-y-2 font-pixel text-xs">
                                 <div className="flex justify-between text-slate-300">
                                     <span>Class:</span>
-                                    <span className="text-white">Postdoc Scholar</span>
+                                    <span className="text-white">Postdoc Researcher</span>
                                 </div>
                                 <div className="flex justify-between text-slate-300">
-                                    <span>Level:</span>
-                                    <span className="text-white">30</span>
+                                    <span>Affiliation:</span>
+                                    <span className="text-white">University of Turin</span>
                                 </div>
                                 <div className="flex justify-between text-slate-300">
                                     <span>Intelligence:</span>
@@ -62,12 +63,13 @@ const About = () => {
                         <div className="bg-yellow-900/20 p-6 rounded border border-yellow-700/50 mb-6">
                             <h3 className="font-pixel text-xl text-yellow-500 mb-4">Quest Log</h3>
                             <p className="text-slate-300 mb-4 leading-relaxed">
-                                Greetings, traveler! I am a dedicated Postdoc Researcher exploring the vast realms of [Your Research Area].
-                                My current quest involves deciphering the ancient scrolls of [Specific Topic].
+                                Greetings, traveler! I am currently a <strong>Postdoctoral Researcher</strong> at the Department of Culture, Politics and Society, <strong>University of Turin</strong>.
+                            </p>
+                            <p className="text-slate-300 mb-4 leading-relaxed">
+                                My current quest involves "Science technology relationships in the development of AI in the health sector", under the guidance of Prof. Aldo Geuna.
                             </p>
                             <p className="text-slate-300 leading-relaxed">
-                                I have journeyed through many academic dungeons and defeated numerous peer-review bosses.
-                                My goal is to unlock the secrets of the universe and share this knowledge with the guild.
+                                My skills lie in <strong>Innovation and Macroeconomic Dynamics</strong>, <strong>Industrial Dynamics</strong>, and <strong>Econometrics</strong>. I specialize in analyzing the impact of AI on growth and inequalities.
                             </p>
                         </div>
 
@@ -77,8 +79,8 @@ const About = () => {
                                 <p className="font-pixel text-[10px] text-slate-400">Years XP</p>
                             </div>
                             <div className="p-4 bg-slate-900 rounded border-2 border-slate-700 text-center group hover:border-yellow-500 transition-colors">
-                                <h4 className="font-pixel text-yellow-500 text-lg mb-1">10+</h4>
-                                <p className="font-pixel text-[10px] text-slate-400">Scrolls Written</p>
+                                <h4 className="font-pixel text-yellow-500 text-lg mb-1">Ph.D.</h4>
+                                <p className="font-pixel text-[10px] text-slate-400">Economics</p>
                             </div>
                         </div>
                     </motion.div>
