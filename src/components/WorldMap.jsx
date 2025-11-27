@@ -163,6 +163,20 @@ const WorldMap = ({ onNavigate }) => {
                 title="Start Engine?"
             />
 
+            {/* Easter Egg Indicator */}
+            <img
+                src="/easter_egg.png"
+                alt="Easter Egg"
+                className="absolute z-10 w-60 drop-shadow-md cursor-pointer animate-bounce hover:scale-110 transition-transform duration-300"
+                style={{
+                    left: '10%',
+                    top: '34%', // Moved up by ~half height
+                    transform: 'translate(-50%, -50%)'
+                }}
+                onClick={() => setShowGame(true)}
+                title="Click me!"
+            />
+
             {/* Tenure Road Game Overlay */}
             <AnimatePresence>
                 {showGame && (
