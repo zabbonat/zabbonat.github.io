@@ -61,7 +61,13 @@ function App() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <WorldMap onNavigate={setCurrentView} />
+            <WorldMap onNavigate={(view) => {
+              if (view === 'classic-mode') {
+                setIsClassicMode(true);
+              } else {
+                setCurrentView(view);
+              }
+            }} />
           </motion.div>
         ) : (
           <motion.div
