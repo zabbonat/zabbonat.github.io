@@ -17,11 +17,11 @@ const WorldMap = ({ onNavigate }) => {
     // - Library (Publications): More to the right
     // - Tavern (About): Left/Center (Assumed remaining spot)
     const zones = [
-        { id: 'about', name: 'The Tavern', desc: '(About Me)', x: 20, y: 60, radius: 25 },
-        { id: 'research', name: 'Alchemist Lab', desc: '(Research)', x: 85, y: 30, radius: 25 },
-        { id: 'publications', name: 'The Library', desc: '(Publications)', x: 60, y: 25, radius: 25 },
-        { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 15, y: 20, radius: 25 },
-        { id: 'teaching', name: 'The Academy', desc: '(Teaching)', x: 80, y: 75, radius: 25 },
+        { id: 'about', name: 'The Tavern', desc: '(About Me)', x: 42, y: 42, radius: 25 },
+        { id: 'research', name: 'Alchemist Lab', desc: '(Research)', x: 75, y: 25, radius: 25 },
+        { id: 'publications', name: 'The Library', desc: '(Publications)', x: 25, y: 65, radius: 25 },
+        { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 20, y: 25, radius: 25 },
+        { id: 'teaching', name: 'The Academy', desc: '(Teaching)', x: 70, y: 65, radius: 25 },
     ];
 
     // Movement speed
@@ -180,7 +180,7 @@ const WorldMap = ({ onNavigate }) => {
             {/* Classical View Door */}
             <motion.button
                 onClick={() => onNavigate('classic-mode')}
-                className="absolute right-8 top-1/2 transform -translate-y-1/2 flex flex-col items-center group z-20 cursor-pointer"
+                className="absolute right-8 top-32 flex flex-col items-center group z-20 cursor-pointer"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
             >
