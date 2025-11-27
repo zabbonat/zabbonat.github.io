@@ -31,21 +31,21 @@ const Contact = () => {
                         </p>
 
                         <div className="space-y-6">
-                            <a href="mailto:email@example.com" className="flex items-center gap-4 text-slate-300 hover:text-accent transition-colors group">
+                            <a href="mailto:diletta.abbonato@unito.it" className="flex items-center gap-4 text-slate-300 hover:text-accent transition-colors group">
                                 <div className="p-3 bg-slate-800 rounded-lg group-hover:bg-slate-700 transition-colors">
                                     <Mail size={24} />
                                 </div>
-                                <span className="text-lg">email@example.com</span>
+                                <span className="text-lg">diletta.abbonato@unito.it</span>
                             </a>
 
-                            <a href="#" className="flex items-center gap-4 text-slate-300 hover:text-accent transition-colors group">
+                            <a href="https://www.linkedin.com/in/dilettaabbonato/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-slate-300 hover:text-accent transition-colors group">
                                 <div className="p-3 bg-slate-800 rounded-lg group-hover:bg-slate-700 transition-colors">
                                     <Linkedin size={24} />
                                 </div>
                                 <span className="text-lg">LinkedIn Profile</span>
                             </a>
 
-                            <a href="#" className="flex items-center gap-4 text-slate-300 hover:text-accent transition-colors group">
+                            <a href="https://github.com/zabbonat" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-slate-300 hover:text-accent transition-colors group">
                                 <div className="p-3 bg-slate-800 rounded-lg group-hover:bg-slate-700 transition-colors">
                                     <Github size={24} />
                                 </div>
@@ -56,7 +56,7 @@ const Contact = () => {
                                 <div className="p-3 bg-slate-800 rounded-lg">
                                     <MapPin size={24} />
                                 </div>
-                                <span className="text-lg">[City, Country]</span>
+                                <span className="text-lg">Turin, Italy</span>
                             </div>
                         </div>
                     </motion.div>
