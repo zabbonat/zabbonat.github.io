@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FlaskConical, Network, Github } from 'lucide-react';
+import { FlaskConical, Network, Github, Brain } from 'lucide-react';
 
 const Research = () => {
     return (
@@ -58,17 +58,36 @@ const Research = () => {
                         </div>
                     </motion.div>
 
-                    {/* Placeholder for future projects */}
+                    {/* DDI Model Project */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.5, delay: 0.2 }}
-                        className="flex items-center justify-center bg-slate-900/50 rounded-xl border-4 border-slate-800 border-dashed p-8"
+                        className="group relative bg-slate-900 rounded-xl overflow-hidden border-4 border-purple-900 hover:border-purple-500 transition-all"
                     >
-                        <div className="text-center">
-                            <FlaskConical size={48} className="text-slate-700 mx-auto mb-4" />
-                            <h3 className="font-pixel text-slate-500 text-lg">Empty Flask</h3>
-                            <p className="text-slate-600 text-xs mt-2">More experiments coming soon...</p>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent z-10" />
+
+                        <div className="h-48 bg-slate-800 flex items-center justify-center">
+                            <Brain size={64} className="text-purple-500/50 group-hover:text-purple-400 transition-colors" />
+                        </div>
+
+                        <div className="relative z-20 p-6">
+                            <h3 className="font-pixel text-xl text-white mb-2">DDI Model</h3>
+                            <p className="text-slate-300 text-sm mb-4">
+                                A fine-tuned transformer model designed to detect Data-Driven Innovation (DDI) concepts in text.
+                            </p>
+
+                            <div className="flex gap-4">
+                                <a
+                                    href="https://huggingface.co/Zabbonat/DDI"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white font-pixel text-xs rounded transition-colors"
+                                >
+                                    <FlaskConical size={16} />
+                                    View Model
+                                </a>
+                            </div>
                         </div>
                     </motion.div>
                 </div>
