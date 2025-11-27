@@ -131,7 +131,7 @@ const WorldMap = ({ onNavigate }) => {
 
             {/* Interaction Prompt */}
             {activeZone && !showGame && (
-                <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-50 animate-bounce">
+                <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-50">
                     <div className="bg-black/80 p-4 rounded-lg border-2 border-yellow-500 text-center shadow-lg">
                         <p className="font-pixel text-sm text-white mb-1">Enter {activeZone.name}?</p>
                         <div className="flex items-center justify-center gap-2 text-yellow-300 font-pixel text-xs">
@@ -167,7 +167,7 @@ const WorldMap = ({ onNavigate }) => {
             <img
                 src="/easter_egg.png"
                 alt="Easter Egg"
-                className="absolute z-10 w-60 drop-shadow-md cursor-pointer animate-bounce hover:scale-110 transition-transform duration-300"
+                className="absolute z-10 w-60 drop-shadow-md cursor-pointer animate-float hover:scale-110 transition-transform duration-300"
                 style={{
                     left: '10%',
                     top: '34%', // Moved up by ~half height
