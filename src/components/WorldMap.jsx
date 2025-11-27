@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { DoorOpen, ArrowUp, ArrowDown, ArrowLeft, ArrowRight, CornerDownLeft } from 'lucide-react';
+import { ArrowUp, ArrowDown, ArrowLeft, ArrowRight, CornerDownLeft } from 'lucide-react';
 
 const WorldMap = ({ onNavigate }) => {
     // Avatar position in percentages (x, y)
@@ -17,12 +17,12 @@ const WorldMap = ({ onNavigate }) => {
     // - Library (Publications): More to the right
     // - Tavern (About): Left/Center (Assumed remaining spot)
     const zones = [
-        { id: 'about', name: 'The Tavern', desc: '(About Me)', x: 42, y: 42, radius: 10 },
+        { id: 'about', name: 'The Tavern', desc: '(About Me)', x: 43.5, y: 42, radius: 10 },
         { id: 'research', name: 'Alchemist Lab', desc: '(Research)', x: 63, y: 22, radius: 10 },
         { id: 'publications', name: 'The Library', desc: '(Publications)', x: 36, y: 63, radius: 10 },
         { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 34.5, y: 15, radius: 10 },
         { id: 'teaching', name: 'The Academy', desc: '(Teaching)', x: 66.5, y: 65, radius: 10 },
-        { id: 'classic-mode', name: 'Classical View', desc: '(Exit RPG Mode)', x: 94, y: 33, radius: 20 },
+        { id: 'classic-mode', name: 'Classical View', desc: '(Exit RPG Mode)', x: 94, y: 30, radius: 20 },
     ];
 
     // Movement speed
@@ -178,20 +178,6 @@ const WorldMap = ({ onNavigate }) => {
                 </div>
             ))}
 
-            {/* Classical View Door */}
-            <motion.button
-                onClick={() => onNavigate('classic-mode')}
-                className="absolute right-8 top-32 flex flex-col items-center group z-20 cursor-pointer"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-            >
-                <div className="w-16 h-24 bg-slate-800 border-4 border-slate-600 rounded-t-full flex items-center justify-center group-hover:bg-slate-700 group-hover:border-white transition-colors shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-                    <DoorOpen size={32} className="text-white" />
-                </div>
-                <div className="mt-2 bg-black/70 px-3 py-1 rounded border border-white/30">
-                    <span className="font-pixel text-[10px] text-white">Classical View</span>
-                </div>
-            </motion.button>
 
             {/* Player Avatar - Smaller size to make buildings look larger */}
             <motion.div
