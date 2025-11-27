@@ -102,6 +102,18 @@ const Publications = () => {
                         </div>
                     </motion.div>
                 </div>
+
+                <div className="mt-12 text-center">
+                    <p className="text-slate-400 mb-4">For a complete list of my publications, please visit my academic profiles:</p>
+                    <div className="flex justify-center gap-4">
+                        <a href="https://scholar.google.com/" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-slate-800 rounded hover:bg-slate-700 text-white transition-colors border border-slate-600">
+                            Google Scholar
+                        </a>
+                        <a href="https://orcid.org/" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-slate-800 rounded hover:bg-slate-700 text-white transition-colors border border-slate-600">
+                            ORCID
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
     );

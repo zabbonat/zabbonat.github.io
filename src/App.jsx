@@ -7,6 +7,7 @@ import About from './components/About';
 import CV from './components/CV';
 import Publications from './components/Publications';
 import Research from './components/Research';
+import Teaching from './components/Teaching';
 import Contact from './components/Contact';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -21,6 +22,7 @@ function App() {
       case 'research': return <Research />;
       case 'publications': return <Publications />;
       case 'cv': return <CV />;
+      case 'teaching': return <Teaching />;
       default: return null;
     }
   };
@@ -33,6 +35,7 @@ function App() {
         <About />
         <Research />
         <Publications />
+        <Teaching />
         <CV />
         <Contact />
 

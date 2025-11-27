@@ -9,12 +9,15 @@ const WorldMap = ({ onNavigate }) => {
     const [isMoving, setIsMoving] = useState(false);
     const [activeZone, setActiveZone] = useState(null);
 
-    // Expanded zones with larger radius for easier entry
+    // 5 Zones for the new map
+    // Coordinates are approximate based on the description: 
+    // 1) Tavern (About) 2) Lab (Research) 3) Library (Publications) 4) Tower (CV) 5) School (Teaching)
     const zones = [
-        { id: 'about', name: 'The Tavern', desc: '(About Me)', x: 20, y: 60, radius: 25 },
-        { id: 'research', name: 'Alchemist Lab', desc: '(Research)', x: 75, y: 30, radius: 25 },
-        { id: 'publications', name: 'The Library', desc: '(Publications)', x: 30, y: 20, radius: 25 },
-        { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 75, y: 75, radius: 25 },
+        { id: 'about', name: 'The Tavern', desc: '(About Me)', x: 15, y: 70, radius: 20 },
+        { id: 'research', name: 'Alchemist Lab', desc: '(Research)', x: 80, y: 25, radius: 20 },
+        { id: 'publications', name: 'The Library', desc: '(Publications)', x: 25, y: 25, radius: 20 },
+        { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 85, y: 75, radius: 20 },
+        { id: 'teaching', name: 'The Academy', desc: '(Teaching)', x: 50, y: 50, radius: 20 }, // Central school
     ];
 
     // Movement speed
@@ -27,8 +30,10 @@ const WorldMap = ({ onNavigate }) => {
                 e.preventDefault();
             }
 
-            if (e.key === 'Enter' && activeZone) {
-                onNavigate(activeZone.id);
+            if (e.key === 'Enter') {
+                if (activeZone) {
+                    onNavigate(activeZone.id);
+                }
                 return;
             }
 
@@ -84,8 +89,6 @@ const WorldMap = ({ onNavigate }) => {
         zones.forEach((zone) => {
             const dx = position.x - zone.x;
             const dy = position.y - zone.y;
-            // Adjust distance calculation for aspect ratio roughly (assuming 16:9 screen, y is 'worth' more percentage-wise)
-            // But simple Euclidean is fine for this abstraction
             const distance = Math.sqrt(dx * dx + dy * dy);
 
             if (distance < zone.radius) {
@@ -97,10 +100,10 @@ const WorldMap = ({ onNavigate }) => {
 
     return (
         <div className="relative w-full h-screen bg-black overflow-hidden flex items-center justify-center select-none">
-            {/* Map Background - Contained to show full map */}
+            {/* Map Background */}
             <div
                 className="absolute inset-0 bg-contain bg-center bg-no-repeat opacity-90"
-                style={{ backgroundImage: "url('/world_map.png')" }}
+                style={{ backgroundImage: "url('/world_map_5.png')" }}
             />
 
             {/* Instructions Overlay */}
@@ -149,13 +152,13 @@ const WorldMap = ({ onNavigate }) => {
                     style={{
                         top: `${zone.y}%`,
                         left: `${zone.x}%`,
-                        width: '250px', // Much larger hit area
-                        height: '250px',
+                        width: '200px',
+                        height: '200px',
                         transform: 'translate(-50%, -50%)',
-                        backgroundColor: 'transparent' // Invisible
+                        backgroundColor: 'transparent'
                     }}
                 >
-                    {/* Always visible label, positioned centrally */}
+                    {/* Always visible label */}
                     <div className="bg-black/60 p-2 rounded border border-white/10 backdrop-blur-sm">
                         <p className="font-pixel text-sm text-white text-center whitespace-nowrap drop-shadow-md">
                             {zone.name}
@@ -182,7 +185,7 @@ const WorldMap = ({ onNavigate }) => {
                 </div>
             </motion.button>
 
-            {/* Player Avatar - MASSIVE SIZE */}
+            {/* Player Avatar */}
             <motion.div
                 className="absolute z-30 flex flex-col items-center pointer-events-none"
                 style={{
