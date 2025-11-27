@@ -1,21 +1,16 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUp, ArrowDown, ArrowLeft, ArrowRight, CornerDownLeft } from 'lucide-react';
+import TenureRoadGame from './TenureRoadGame';
 
 const WorldMap = ({ onNavigate }) => {
-    // Avatar position in percentages (x, y)
     const [position, setPosition] = useState({ x: 50, y: 50 });
     const [direction, setDirection] = useState('down');
     const [isMoving, setIsMoving] = useState(false);
     const [activeZone, setActiveZone] = useState(null);
+    const [showGame, setShowGame] = useState(false);
 
     // Zones mapped to user's 'world_map_clean.png'
-    // Coordinates adjusted based on user feedback:
-    // - Tower (Archives/CV): Upper Left
-    // - Alchemist Lab (Research): Right (Laboratory picture)
-    // - School (Teaching): Below Right (House with ABC)
-    // - Library (Publications): More to the right
-    // - Tavern (About): Left/Center (Assumed remaining spot)
     const zones = [
         { id: 'about', name: 'The Tavern', desc: '(About Me)', x: 45.5, y: 42, radius: 10 },
         { id: 'research', name: 'Alchemist Lab', desc: '(Research)', x: 63, y: 22, radius: 10 },
@@ -41,6 +36,9 @@ const WorldMap = ({ onNavigate }) => {
                 }
                 return;
             }
+
+            // Disable movement if game is open
+            if (showGame) return;
 
             setIsMoving(true);
             setPosition((prev) => {
@@ -86,7 +84,7 @@ const WorldMap = ({ onNavigate }) => {
             window.removeEventListener('keydown', handleKeyDown);
             window.removeEventListener('keyup', handleKeyUp);
         };
-    }, [activeZone, onNavigate]);
+    }, [activeZone, onNavigate, showGame]);
 
     // Check collisions
     useEffect(() => {
@@ -115,7 +113,7 @@ const WorldMap = ({ onNavigate }) => {
             />
 
             {/* Instructions Overlay */}
-            {!isMoving && !activeZone && (
+            {!isMoving && !activeZone && !showGame && (
                 <div className="absolute top-20 left-1/2 transform -translate-x-1/2 text-center z-10 pointer-events-none animate-pulse">
                     <div className="bg-black/50 p-4 rounded-lg backdrop-blur-sm border border-white/20">
                         <p className="font-pixel text-xs text-yellow-300 mb-2">Use Arrow Keys to Move</p>
@@ -132,7 +130,7 @@ const WorldMap = ({ onNavigate }) => {
             )}
 
             {/* Interaction Prompt */}
-            {activeZone && (
+            {activeZone && !showGame && (
                 <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-50 animate-bounce">
                     <div className="bg-black/80 p-4 rounded-lg border-2 border-yellow-500 text-center shadow-lg">
                         <p className="font-pixel text-sm text-white mb-1">Enter {activeZone.name}?</p>
@@ -151,17 +149,33 @@ const WorldMap = ({ onNavigate }) => {
                 </h1>
             </div>
 
-            {/* Motorcycle */}
+            {/* Motorcycle (Easter Egg) */}
             <img
                 src="/hornet750rpg.png"
                 alt="Motorcycle"
-                className="absolute z-10 w-40 pointer-events-none drop-shadow-lg"
+                className="absolute z-10 w-40 drop-shadow-lg cursor-pointer hover:scale-110 transition-transform duration-300"
                 style={{
                     left: '10%',
                     top: '38%',
                     transform: 'translate(-50%, -50%)'
                 }}
+                onClick={() => setShowGame(true)}
+                title="Start Engine?"
             />
+
+            {/* Tenure Road Game Overlay */}
+            <AnimatePresence>
+                {showGame && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-50"
+                    >
+                        <TenureRoadGame onClose={() => setShowGame(false)} />
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             {/* Interactive Zones (Invisible Hitboxes with Labels) */}
             {zones.map((zone) => (
@@ -190,8 +204,7 @@ const WorldMap = ({ onNavigate }) => {
                 </div>
             ))}
 
-
-            {/* Player Avatar - Smaller size to make buildings look larger */}
+            {/* Player Avatar */}
             <motion.div
                 className="absolute z-30 flex flex-col items-center pointer-events-none"
                 style={{
