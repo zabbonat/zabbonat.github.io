@@ -19,9 +19,9 @@ const WorldMap = ({ onNavigate }) => {
     const zones = [
         { id: 'about', name: 'The Tavern', desc: '(About Me)', x: 42, y: 42, radius: 25 },
         { id: 'research', name: 'Alchemist Lab', desc: '(Research)', x: 70, y: 25, radius: 25 },
-        { id: 'publications', name: 'The Library', desc: '(Publications)', x: 30, y: 65, radius: 25 },
-        { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 25, y: 25, radius: 25 },
-        { id: 'teaching', name: 'The Academy', desc: '(Teaching)', x: 70, y: 65, radius: 25 },
+        { id: 'publications', name: 'The Library', desc: '(Publications)', x: 36, y: 63, radius: 25 },
+        { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 35, y: 15, radius: 25 },
+        { id: 'teaching', name: 'The Academy', desc: '(Teaching)', x: 67, y: 65, radius: 25 },
     ];
 
     // Movement speed
