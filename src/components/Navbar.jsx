@@ -38,10 +38,10 @@ const Navbar = () => {
                                 {link.name}
                             </a>
                         ))}
-                        <div className="flex items-center space-x-4 ml-8 border-l border-slate-700 pl-8">
-                            <a href="#" className="text-slate-400 hover:text-white transition-colors"><Github size={20} /></a>
-                            <a href="#" className="text-slate-400 hover:text-white transition-colors"><Linkedin size={20} /></a>
-                            <a href="mailto:email@example.com" className="text-slate-400 hover:text-white transition-colors"><Mail size={20} /></a>
+                        <div className="flex items-center space-x-4 ml-8 border-l border-emerald-800 pl-8">
+                            <a href="https://github.com/zabbonat" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors"><Github size={20} /></a>
+                            <a href="https://www.linkedin.com/in/dilettaabbonato/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors"><Linkedin size={20} /></a>
+                            <a href="mailto:diletta.abbonato@unito.it" className="text-slate-400 hover:text-white transition-colors"><Mail size={20} /></a>
                         </div>
                     </div>
 
@@ -78,9 +78,9 @@ const Navbar = () => {
                                 </a>
                             ))}
                             <div className="flex space-x-6 pt-4">
-                                <a href="#" className="text-slate-400 hover:text-white"><Github size={24} /></a>
-                                <a href="#" className="text-slate-400 hover:text-white"><Linkedin size={24} /></a>
-                                <a href="mailto:email@example.com" className="text-slate-400 hover:text-white"><Mail size={24} /></a>
+                                <a href="https://github.com/zabbonat" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white"><Github size={24} /></a>
+                                <a href="https://www.linkedin.com/in/dilettaabbonato/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white"><Linkedin size={24} /></a>
+                                <a href="mailto:diletta.abbonato@unito.it" className="text-slate-400 hover:text-white"><Mail size={24} /></a>
                             </div>
                         </div>
                     </motion.div>

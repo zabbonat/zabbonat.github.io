@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { DoorOpen, ArrowUp, ArrowDown, ArrowLeft, ArrowRight, MousePointerClick, CornerDownLeft } from 'lucide-react';
+import { DoorOpen, ArrowUp, ArrowDown, ArrowLeft, ArrowRight, CornerDownLeft } from 'lucide-react';
 
 const WorldMap = ({ onNavigate }) => {
     // Avatar position in percentages (x, y)
@@ -9,11 +9,12 @@ const WorldMap = ({ onNavigate }) => {
     const [isMoving, setIsMoving] = useState(false);
     const [activeZone, setActiveZone] = useState(null);
 
+    // Expanded zones with larger radius for easier entry
     const zones = [
-        { id: 'about', name: 'The Tavern', desc: '(About Me)', x: 20, y: 60, radius: 10, color: 'bg-orange-500/30' },
-        { id: 'research', name: 'Alchemist Lab', desc: '(Research)', x: 70, y: 30, radius: 10, color: 'bg-purple-500/30' },
-        { id: 'publications', name: 'The Library', desc: '(Publications)', x: 30, y: 20, radius: 10, color: 'bg-blue-500/30' },
-        { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 70, y: 70, radius: 10, color: 'bg-yellow-500/30' },
+        { id: 'about', name: 'The Tavern', desc: '(About Me)', x: 20, y: 60, radius: 25 },
+        { id: 'research', name: 'Alchemist Lab', desc: '(Research)', x: 75, y: 30, radius: 25 },
+        { id: 'publications', name: 'The Library', desc: '(Publications)', x: 30, y: 20, radius: 25 },
+        { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 75, y: 75, radius: 25 },
     ];
 
     // Movement speed
@@ -96,9 +97,9 @@ const WorldMap = ({ onNavigate }) => {
 
     return (
         <div className="relative w-full h-screen bg-black overflow-hidden flex items-center justify-center select-none">
-            {/* Map Background */}
+            {/* Map Background - Contained to show full map */}
             <div
-                className="absolute inset-0 bg-cover bg-center opacity-80"
+                className="absolute inset-0 bg-contain bg-center bg-no-repeat opacity-90"
                 style={{ backgroundImage: "url('/world_map.png')" }}
             />
 
@@ -139,22 +140,24 @@ const WorldMap = ({ onNavigate }) => {
                 </h1>
             </div>
 
-            {/* Interactive Zones (Visuals & Clickables) */}
+            {/* Interactive Zones (Invisible Hitboxes with Labels) */}
             {zones.map((zone) => (
                 <div
                     key={zone.id}
                     onClick={() => onNavigate(zone.id)}
-                    className={`absolute rounded-full ${zone.color} border-2 border-white/30 backdrop-blur-[2px] flex items-center justify-center z-0 cursor-pointer hover:bg-white/20 transition-colors`}
+                    className="absolute flex items-center justify-center z-0 cursor-pointer group"
                     style={{
                         top: `${zone.y}%`,
                         left: `${zone.x}%`,
-                        width: '140px',
-                        height: '140px',
-                        transform: 'translate(-50%, -50%)'
+                        width: '250px', // Much larger hit area
+                        height: '250px',
+                        transform: 'translate(-50%, -50%)',
+                        backgroundColor: 'transparent' // Invisible
                     }}
                 >
-                    <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 w-max bg-black/80 p-2 rounded border border-white/20 pointer-events-none">
-                        <p className="font-pixel text-xs text-white text-center whitespace-nowrap">
+                    {/* Always visible label, positioned centrally */}
+                    <div className="bg-black/60 p-2 rounded border border-white/10 backdrop-blur-sm">
+                        <p className="font-pixel text-sm text-white text-center whitespace-nowrap drop-shadow-md">
                             {zone.name}
                         </p>
                         <p className="font-pixel text-[10px] text-yellow-300 text-center mt-1">
@@ -179,7 +182,7 @@ const WorldMap = ({ onNavigate }) => {
                 </div>
             </motion.button>
 
-            {/* Player Avatar */}
+            {/* Player Avatar - MASSIVE SIZE */}
             <motion.div
                 className="absolute z-30 flex flex-col items-center pointer-events-none"
                 style={{
@@ -197,9 +200,9 @@ const WorldMap = ({ onNavigate }) => {
                 <img
                     src="/me_rpg.png"
                     alt="Player"
-                    className={`w-48 h-48 object-contain drop-shadow-2xl transition-transform ${direction === 'left' ? 'scale-x-[-1]' : ''}`}
+                    className={`w-80 h-80 md:w-96 md:h-96 object-contain drop-shadow-2xl transition-transform ${direction === 'left' ? 'scale-x-[-1]' : ''}`}
                 />
-                <div className="bg-black/50 px-3 py-1 rounded-full mt-[-20px]">
+                <div className="bg-black/50 px-3 py-1 rounded-full mt-[-40px]">
                     <span className="font-pixel text-xs text-white">You (Lvl 31)</span>
                 </div>
             </motion.div>
