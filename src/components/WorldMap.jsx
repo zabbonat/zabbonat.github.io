@@ -20,8 +20,8 @@ const WorldMap = ({ onNavigate }) => {
         { id: 'about', name: 'The Tavern', desc: '(About Me)', x: 42, y: 42, radius: 10 },
         { id: 'research', name: 'Alchemist Lab', desc: '(Research)', x: 63, y: 22, radius: 10 },
         { id: 'publications', name: 'The Library', desc: '(Publications)', x: 36, y: 63, radius: 10 },
-        { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 33, y: 15, radius: 10 },
-        { id: 'teaching', name: 'The Academy', desc: '(Teaching)', x: 68, y: 65, radius: 10 },
+        { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 34.5, y: 15, radius: 10 },
+        { id: 'teaching', name: 'The Academy', desc: '(Teaching)', x: 66.5, y: 65, radius: 10 },
         { id: 'classic-mode', name: 'Classical View', desc: '(Exit RPG Mode)', x: 94, y: 33, radius: 20 },
     ];
 
