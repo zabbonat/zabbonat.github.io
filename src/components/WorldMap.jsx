@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { DoorOpen, ArrowUp, ArrowDown, ArrowLeft, ArrowRight } from 'lucide-react';
+import { DoorOpen, ArrowUp, ArrowDown, ArrowLeft, ArrowRight, MousePointerClick, CornerDownLeft } from 'lucide-react';
 
 const WorldMap = ({ onNavigate }) => {
     // Avatar position in percentages (x, y)
     const [position, setPosition] = useState({ x: 50, y: 50 });
-    const [direction, setDirection] = useState('down'); // for future sprite animation
+    const [direction, setDirection] = useState('down');
     const [isMoving, setIsMoving] = useState(false);
+    const [activeZone, setActiveZone] = useState(null);
 
     const zones = [
         { id: 'about', name: 'The Tavern', desc: '(About Me)', x: 20, y: 60, radius: 10, color: 'bg-orange-500/30' },
@@ -23,6 +24,11 @@ const WorldMap = ({ onNavigate }) => {
             // Prevent default scrolling for arrow keys
             if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
                 e.preventDefault();
+            }
+
+            if (e.key === 'Enter' && activeZone) {
+                onNavigate(activeZone.id);
+                return;
             }
 
             setIsMoving(true);
@@ -69,22 +75,24 @@ const WorldMap = ({ onNavigate }) => {
             window.removeEventListener('keydown', handleKeyDown);
             window.removeEventListener('keyup', handleKeyUp);
         };
-    }, []);
+    }, [activeZone, onNavigate]);
 
     // Check collisions
     useEffect(() => {
+        let foundZone = null;
         zones.forEach((zone) => {
-            // Simple distance check in percentage units (approximate but works for this scale)
-            // Aspect ratio might skew it slightly but acceptable for MVP
             const dx = position.x - zone.x;
             const dy = position.y - zone.y;
+            // Adjust distance calculation for aspect ratio roughly (assuming 16:9 screen, y is 'worth' more percentage-wise)
+            // But simple Euclidean is fine for this abstraction
             const distance = Math.sqrt(dx * dx + dy * dy);
 
-            if (distance < zone.radius / 2) {
-                onNavigate(zone.id);
+            if (distance < zone.radius) {
+                foundZone = zone;
             }
         });
-    }, [position, onNavigate]);
+        setActiveZone(foundZone);
+    }, [position]);
 
     return (
         <div className="relative w-full h-screen bg-black overflow-hidden flex items-center justify-center select-none">
@@ -94,8 +102,8 @@ const WorldMap = ({ onNavigate }) => {
                 style={{ backgroundImage: "url('/world_map.png')" }}
             />
 
-            {/* Instructions Overlay (fades out when moving) */}
-            {!isMoving && (
+            {/* Instructions Overlay */}
+            {!isMoving && !activeZone && (
                 <div className="absolute top-20 left-1/2 transform -translate-x-1/2 text-center z-10 pointer-events-none animate-pulse">
                     <div className="bg-black/50 p-4 rounded-lg backdrop-blur-sm border border-white/20">
                         <p className="font-pixel text-xs text-yellow-300 mb-2">Use Arrow Keys to Move</p>
@@ -111,29 +119,46 @@ const WorldMap = ({ onNavigate }) => {
                 </div>
             )}
 
-            {/* Welcome Message (Static at top) */}
+            {/* Interaction Prompt */}
+            {activeZone && (
+                <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-50 animate-bounce">
+                    <div className="bg-black/80 p-4 rounded-lg border-2 border-yellow-500 text-center shadow-lg">
+                        <p className="font-pixel text-sm text-white mb-1">Enter {activeZone.name}?</p>
+                        <div className="flex items-center justify-center gap-2 text-yellow-300 font-pixel text-xs">
+                            <CornerDownLeft size={16} />
+                            <span>Press ENTER</span>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Welcome Message */}
             <div className="absolute top-4 left-0 right-0 text-center z-10 pointer-events-none">
                 <h1 className="font-pixel text-2xl md:text-4xl text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]">
                     Welcome to Diletta's World
                 </h1>
             </div>
 
-            {/* Interactive Zones (Visuals) */}
+            {/* Interactive Zones (Visuals & Clickables) */}
             {zones.map((zone) => (
                 <div
                     key={zone.id}
-                    className={`absolute rounded-full ${zone.color} border-2 border-white/30 backdrop-blur-[2px] flex items-center justify-center z-0`}
+                    onClick={() => onNavigate(zone.id)}
+                    className={`absolute rounded-full ${zone.color} border-2 border-white/30 backdrop-blur-[2px] flex items-center justify-center z-0 cursor-pointer hover:bg-white/20 transition-colors`}
                     style={{
                         top: `${zone.y}%`,
                         left: `${zone.x}%`,
-                        width: '120px',
-                        height: '120px',
+                        width: '140px',
+                        height: '140px',
                         transform: 'translate(-50%, -50%)'
                     }}
                 >
-                    <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-max bg-black/80 p-1 rounded border border-white/20 pointer-events-none">
-                        <p className="font-pixel text-[10px] text-white text-center whitespace-nowrap">
+                    <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 w-max bg-black/80 p-2 rounded border border-white/20 pointer-events-none">
+                        <p className="font-pixel text-xs text-white text-center whitespace-nowrap">
                             {zone.name}
+                        </p>
+                        <p className="font-pixel text-[10px] text-yellow-300 text-center mt-1">
+                            {zone.desc}
                         </p>
                     </div>
                 </div>
@@ -156,11 +181,11 @@ const WorldMap = ({ onNavigate }) => {
 
             {/* Player Avatar */}
             <motion.div
-                className="absolute z-30 flex flex-col items-center"
+                className="absolute z-30 flex flex-col items-center pointer-events-none"
                 style={{
                     top: `${position.y}%`,
                     left: `${position.x}%`,
-                    transform: 'translate(-50%, -50%)' // Centering the avatar on its coordinates
+                    transform: 'translate(-50%, -50%)'
                 }}
                 animate={{
                     y: isMoving ? [0, -5, 0] : 0,
@@ -172,10 +197,10 @@ const WorldMap = ({ onNavigate }) => {
                 <img
                     src="/me_rpg.png"
                     alt="Player"
-                    className={`w-24 h-24 object-contain drop-shadow-lg transition-transform ${direction === 'left' ? 'scale-x-[-1]' : ''}`}
+                    className={`w-48 h-48 object-contain drop-shadow-2xl transition-transform ${direction === 'left' ? 'scale-x-[-1]' : ''}`}
                 />
-                <div className="bg-black/50 px-2 rounded-full mt-1">
-                    <span className="font-pixel text-[8px] text-white">You</span>
+                <div className="bg-black/50 px-3 py-1 rounded-full mt-[-20px]">
+                    <span className="font-pixel text-xs text-white">You (Lvl 31)</span>
                 </div>
             </motion.div>
         </div>

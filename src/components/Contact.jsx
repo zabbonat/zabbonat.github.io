@@ -25,9 +25,7 @@ const Contact = () => {
                     >
                         <h3 className="text-2xl font-semibold mb-6 text-white">Let's Connect</h3>
                         <p className="text-slate-300 mb-8 leading-relaxed">
-                            I am always open to discussing new research opportunities, collaborations,
-                            or just sharing ideas about [Your Field]. Feel free to reach out through
-                            any of the following channels.
+                            I am always open to discussing new research opportunities, collaborations, or just sharing ideas about Artificial Intelligence & Friends. Feel free to reach out through any of the following channels.
                         </p>
 
                         <div className="space-y-6">

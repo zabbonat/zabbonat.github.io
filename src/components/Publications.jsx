@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Book, ScrollText, PenTool } from 'lucide-react';
+import { Book, ScrollText, ExternalLink } from 'lucide-react';
 
 const Publications = () => {
     return (
@@ -32,7 +32,22 @@ const Publications = () => {
                             <div className="bg-slate-900 p-4 rounded border border-slate-700 hover:border-blue-500 transition-colors">
                                 <h4 className="font-bold text-white mb-2">Interdisciplinary research in artificial intelligence: Lessons from COVID-19</h4>
                                 <p className="text-sm text-slate-400 mb-2">Abbonato, D., Bianchini, S., Gargiulo, F., & Venturini, T. (2024)</p>
-                                <span className="inline-block px-2 py-1 bg-blue-900/50 text-blue-300 text-xs rounded border border-blue-800">Quantitative Science Studies</span>
+                                <div className="flex justify-between items-center mt-2">
+                                    <span className="inline-block px-2 py-1 bg-blue-900/50 text-blue-300 text-xs rounded border border-blue-800">Quantitative Science Studies</span>
+                                    <a href="https://doi.org/10.1162/qss_a_00288" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-white transition-colors">
+                                        <ExternalLink size={16} />
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div className="bg-slate-900 p-4 rounded border border-slate-700 hover:border-blue-500 transition-colors">
+                                <h4 className="font-bold text-white mb-2">Ph.D. Thesis</h4>
+                                <p className="text-sm text-slate-400 mb-2">Essays on the Economics of Artificial Intelligence</p>
+                                <div className="flex justify-end mt-2">
+                                    <a href="https://theses.hal.science/tel-04750365" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-white transition-colors">
+                                        <ExternalLink size={16} />
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </motion.div>
@@ -57,12 +72,32 @@ const Publications = () => {
 
                             <div className="bg-slate-900 p-4 rounded border border-slate-700 hover:border-purple-500 transition-colors">
                                 <h4 className="font-bold text-white text-sm mb-1">Validation and enrichment of RUNTS with web data</h4>
-                                <p className="text-xs text-slate-500">Working Paper</p>
+                                <p className="text-xs text-slate-500 mb-2">Working Paper</p>
+                                <div className="flex justify-end">
+                                    <a href="https://boa.unimib.it/bitstream/10281/495001/1/09-francesco-trentini.pdf" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:text-white transition-colors">
+                                        <ExternalLink size={14} />
+                                    </a>
+                                </div>
                             </div>
 
                             <div className="bg-slate-900 p-4 rounded border border-slate-700 hover:border-purple-500 transition-colors">
                                 <h4 className="font-bold text-white text-sm mb-1">Mapping AI’s Labor Impact</h4>
-                                <p className="text-xs text-slate-500">Working Paper</p>
+                                <p className="text-xs text-slate-500 mb-2">Working Paper</p>
+                                <div className="flex justify-end">
+                                    <a href="https://vbn.aau.dk/ws/portalfiles/portal/793096244/361nu7zlk9zt692qz3e8x1rx9hj8au-5.pdf" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:text-white transition-colors">
+                                        <ExternalLink size={14} />
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div className="bg-slate-900 p-4 rounded border border-slate-700 hover:border-purple-500 transition-colors">
+                                <h4 className="font-bold text-white text-sm mb-1">Public sentiments on AI: A cross-country analysis</h4>
+                                <p className="text-xs text-slate-500 mb-2">Working Paper</p>
+                                <div className="flex justify-end">
+                                    <a href="https://arxiv.org/abs/2411.14230" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:text-white transition-colors">
+                                        <ExternalLink size={14} />
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </motion.div>

@@ -27,18 +27,24 @@ function App() {
 
   if (isClassicMode) {
     return (
-      <div className="bg-primary min-h-screen text-white font-sans">
+      <div className="bg-slate-900 min-h-screen text-white font-sans">
         <Navbar />
         <Hero />
         <About />
+        <Research />
+        <Publications />
         <CV />
         <Contact />
-        <button
+
+        {/* Switch back to RPG Mode */}
+        <motion.button
           onClick={() => setIsClassicMode(false)}
-          className="fixed bottom-4 right-4 z-50 px-4 py-2 bg-accent text-primary font-bold rounded shadow-lg hover:bg-accent/90 transition-colors"
+          className="fixed bottom-8 right-8 p-4 bg-purple-600 rounded-full shadow-lg z-50 hover:bg-purple-500 transition-colors border-2 border-white"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
         >
-          Switch to RPG Mode
-        </button>
+          <span className="font-pixel text-xs text-white">RPG Mode</span>
+        </motion.button>
         <footer className="py-8 text-center text-slate-500 text-sm bg-slate-900 border-t border-slate-800">
           <p>© {new Date().getFullYear()} Diletta Abbonato. All rights reserved.</p>
         </footer>

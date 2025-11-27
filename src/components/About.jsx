@@ -43,6 +43,10 @@ const About = () => {
                                     <span className="text-white">University of Turin</span>
                                 </div>
                                 <div className="flex justify-between text-slate-300">
+                                    <span>Level:</span>
+                                    <span className="text-yellow-400">31</span>
+                                </div>
+                                <div className="flex justify-between text-slate-300">
                                     <span>Intelligence:</span>
                                     <span className="text-blue-400">99</span>
                                 </div>
