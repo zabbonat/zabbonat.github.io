@@ -22,7 +22,7 @@ const WorldMap = ({ onNavigate }) => {
         { id: 'publications', name: 'The Library', desc: '(Publications)', x: 36, y: 63, radius: 10 },
         { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 34.5, y: 15, radius: 10 },
         { id: 'teaching', name: 'The Academy', desc: '(Teaching)', x: 66.5, y: 65, radius: 10 },
-        { id: 'classic-mode', name: 'Classical View', desc: '(Exit RPG Mode)', x: 94, y: 21.5, radius: 20 },
+        { id: 'classic-mode', name: 'Classical View', desc: '(Exit RPG Mode)', x: 94, y: 20, radius: 20 },
     ];
 
     // Movement speed
@@ -150,6 +150,18 @@ const WorldMap = ({ onNavigate }) => {
                     Welcome to Diletta's World
                 </h1>
             </div>
+
+            {/* Motorcycle */}
+            <img
+                src="/hornet750rpg.png"
+                alt="Motorcycle"
+                className="absolute z-10 w-40 pointer-events-none drop-shadow-lg"
+                style={{
+                    left: '18%',
+                    top: '38%',
+                    transform: 'translate(-50%, -50%)'
+                }}
+            />
 
             {/* Interactive Zones (Invisible Hitboxes with Labels) */}
             {zones.map((zone) => (
