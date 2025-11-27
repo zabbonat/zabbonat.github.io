@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Heart, Zap, Backpack, Settings } from 'lucide-react';
+import { Heart, Backpack, Settings } from 'lucide-react';
 
 const GameUI = ({ onInventoryClick, onSettingsClick }) => {
     return (
@@ -19,21 +19,6 @@ const GameUI = ({ onInventoryClick, onSettingsClick }) => {
                         />
                     </div>
                     <span className="font-pixel text-[10px] text-white">HP</span>
-                </div>
-
-                <div className="flex items-center gap-2 bg-slate-900/80 p-2 rounded border-2 border-slate-600">
-                    <div className="bg-blue-500 p-1 rounded">
-                        <Zap size={16} className="text-white fill-current" />
-                    </div>
-                    <div className="w-32 h-4 bg-slate-700 rounded overflow-hidden">
-                        <motion.div
-                            initial={{ width: 0 }}
-                            animate={{ width: '80%' }}
-                            transition={{ duration: 1, delay: 0.7 }}
-                            className="h-full bg-blue-500"
-                        />
-                    </div>
-                    <span className="font-pixel text-[10px] text-white">MP</span>
                 </div>
             </div>
 
