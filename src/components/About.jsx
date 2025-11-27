@@ -73,7 +73,7 @@ const About = () => {
                                 My current quest involves "Science technology relationships in the development of AI in the health sector", under the guidance of Prof. Aldo Geuna.
                             </p>
                             <p className="text-slate-300 leading-relaxed">
-                                My skills lie in <strong>Innovation and Macroeconomic Dynamics</strong>, <strong>Industrial Dynamics</strong>, and <strong>Econometrics</strong>. I specialize in analyzing the impact of AI on growth and inequalities.
+                                My skills lie in Innovation, Industrial Dynamics, and Econometrics. I apply Machine Learning and NLP techniques to investigate diverse realms: Scientometrics, Labor Markets, and Social Phenomena.
                             </p>
                         </div>
 

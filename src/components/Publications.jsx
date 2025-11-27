@@ -39,8 +39,6 @@ const Publications = () => {
                                     </a>
                                 </div>
                             </div>
-
-
                         </div>
                     </motion.div>
 
@@ -58,13 +56,8 @@ const Publications = () => {
 
                         <div className="space-y-4 flex-grow">
                             <div className="bg-slate-900 p-4 rounded border border-slate-700 hover:border-emerald-500 transition-colors">
-                                <h4 className="font-bold text-white text-sm mb-1">Partnerships is all you need: The development of transformer technology and its impact on science</h4>
-                                <p className="text-xs text-slate-400 mb-2">Abbonato, D., Bianchini, S., Llerena, P. (2024)</p>
-                            </div>
-
-                            <div className="bg-slate-900 p-4 rounded border border-slate-700 hover:border-emerald-500 transition-colors">
                                 <h4 className="font-bold text-white text-sm mb-1">Mapping AI’s Labor Impact: A Task Exposure Framework for Occupational Analysis</h4>
-                                <p className="text-xs text-slate-400 mb-2">Jurowetzki, R., Squicciarini, M., Abbonato, D.</p>
+                                <p className="text-xs text-slate-400 mb-2">Jurowetzki, R., Squicciarini, M., Abbonato, D. (2025)</p>
                                 <div className="flex justify-end">
                                     <a href="https://vbn.aau.dk/ws/portalfiles/portal/793096244/361nu7zlk9zt692qz3e8x1rx9hj8au-5.pdf" target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:text-white transition-colors">
                                         <ExternalLink size={14} />
@@ -96,7 +89,12 @@ const Publications = () => {
                             <h3 className="font-pixel text-lg text-white">Work in Progress</h3>
                         </div>
 
-                        <div className="space-y-4 flex-grow">
+                        <div className="space-y-4 flex-grow max-h-[500px] overflow-y-auto custom-scrollbar pr-2">
+                            <div className="bg-slate-900 p-4 rounded border border-slate-700 hover:border-yellow-500 transition-colors">
+                                <h4 className="font-bold text-white text-sm mb-1">Partnerships is all you need: The development of transformer technology and its impact on science</h4>
+                                <p className="text-xs text-slate-400 mb-2">Abbonato, D., Bianchini, S., Llerena, P. (2024)</p>
+                            </div>
+
                             <div className="bg-slate-900 p-4 rounded border border-slate-700 hover:border-yellow-500 transition-colors">
                                 <h4 className="font-bold text-white text-sm mb-1">Disentangling the Impact of Methodological and Topic Interdisciplinarity on Scientific Performance in Economics</h4>
                                 <p className="text-xs text-slate-400">Abbonato, D., Guerzoni, M.</p>
@@ -111,13 +109,10 @@ const Publications = () => {
                 </div>
 
                 <div className="mt-12 text-center">
-                    <p className="text-slate-400 mb-4">For a complete list of my publications, please visit my academic profiles:</p>
+                    <p className="text-slate-400 mb-4">For a complete list of my works, please visit my academic profiles:</p>
                     <div className="flex justify-center gap-4">
                         <a href="https://scholar.google.com/" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-slate-800 rounded hover:bg-slate-700 text-white transition-colors border border-slate-600">
                             Google Scholar
-                        </a>
-                        <a href="https://orcid.org/" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-slate-800 rounded hover:bg-slate-700 text-white transition-colors border border-slate-600">
-                            ORCID
                         </a>
                     </div>
                 </div>
