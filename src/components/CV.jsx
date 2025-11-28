@@ -29,7 +29,7 @@ const CV = () => {
                             </div>
                             <div>
                                 <h3 className="font-pixel text-lg text-white mb-2">Master Scroll (CV)</h3>
-                                <p className="font-sans text-slate-400 text-sm">Level 30 Item. Contains full career history.</p>
+                                <p className="font-sans text-slate-400 text-sm">Level 31 Item. Contains full career history.</p>
                             </div>
                         </div>
 
