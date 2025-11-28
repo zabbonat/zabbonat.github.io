@@ -24,6 +24,68 @@ const WorldMap = ({ onNavigate }) => {
     // Movement speed
     const SPEED = 1.5;
 
+    // Movement logic
+    const updatePosition = (key) => {
+        setPosition((prev) => {
+            let newX = prev.x;
+            let newY = prev.y;
+
+            switch (key) {
+                case 'ArrowUp':
+                case 'w':
+                    newY = Math.max(0, prev.y - SPEED);
+                    break;
+                case 'ArrowDown':
+                case 's':
+                    newY = Math.min(100, prev.y + SPEED);
+                    break;
+                case 'ArrowLeft':
+                case 'a':
+                    newX = Math.max(0, prev.x - SPEED);
+                    break;
+                case 'ArrowRight':
+                case 'd':
+                    newX = Math.min(100, prev.x + SPEED);
+                    break;
+                default:
+                    return prev;
+            }
+            return { x: newX, y: newY };
+        });
+    };
+
+    const handleMoveInput = (key) => {
+        if (['ArrowUp', 'w'].includes(key)) setDirection('up');
+        if (['ArrowDown', 's'].includes(key)) setDirection('down');
+        if (['ArrowLeft', 'a'].includes(key)) setDirection('left');
+        if (['ArrowRight', 'd'].includes(key)) setDirection('right');
+
+        updatePosition(key);
+    };
+
+    // D-pad state
+    const [activeButton, setActiveButton] = useState(null);
+
+    // D-pad loop
+    useEffect(() => {
+        let interval;
+        if (activeButton) {
+            setIsMoving(true);
+            handleMoveInput(activeButton); // Initial move
+            interval = setInterval(() => {
+                handleMoveInput(activeButton);
+            }, 50); // Repeat every 50ms
+        } else {
+            // Only stop moving if no key is pressed (handled by keyup for keyboard)
+            // For touch, we stop immediately when button is released
+            // We need to be careful not to conflict with keyboard isMoving state
+            // But since this is mobile-focused, it's likely fine.
+            // Actually, let's just let the keyUp handler handle keyboard and this handle touch.
+            if (!activeButton) setIsMoving(false);
+        }
+        return () => clearInterval(interval);
+    }, [activeButton]);
+
     useEffect(() => {
         const handleKeyDown = (e) => {
             // Prevent default scrolling for arrow keys
@@ -46,36 +108,7 @@ const WorldMap = ({ onNavigate }) => {
             if (showGame) return;
 
             setIsMoving(true);
-            setPosition((prev) => {
-                let newX = prev.x;
-                let newY = prev.y;
-
-                switch (e.key) {
-                    case 'ArrowUp':
-                    case 'w':
-                        newY = Math.max(0, prev.y - SPEED);
-                        setDirection('up');
-                        break;
-                    case 'ArrowDown':
-                    case 's':
-                        newY = Math.min(100, prev.y + SPEED);
-                        setDirection('down');
-                        break;
-                    case 'ArrowLeft':
-                    case 'a':
-                        newX = Math.max(0, prev.x - SPEED);
-                        setDirection('left');
-                        break;
-                    case 'ArrowRight':
-                    case 'd':
-                        newX = Math.min(100, prev.x + SPEED);
-                        setDirection('right');
-                        break;
-                    default:
-                        return prev;
-                }
-                return { x: newX, y: newY };
-            });
+            handleMoveInput(e.key);
         };
 
         const handleKeyUp = () => {
@@ -107,7 +140,7 @@ const WorldMap = ({ onNavigate }) => {
     }, [position]);
 
     return (
-        <div className="relative w-full h-screen bg-black overflow-hidden flex items-center justify-center select-none">
+        <div className="relative w-full h-screen bg-black overflow-hidden flex items-center justify-center select-none touch-none">
             {/* Map Background */}
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -117,9 +150,9 @@ const WorldMap = ({ onNavigate }) => {
                 }}
             />
 
-            {/* Instructions Overlay */}
+            {/* Instructions Overlay (Desktop) */}
             {!isMoving && !activeZone && !showGame && (
-                <div className="absolute top-20 left-1/2 transform -translate-x-1/2 text-center z-10 pointer-events-none animate-pulse">
+                <div className="hidden md:block absolute top-20 left-1/2 transform -translate-x-1/2 text-center z-10 pointer-events-none animate-pulse">
                     <div className="bg-black/50 p-4 rounded-lg backdrop-blur-sm border border-white/20">
                         <p className="font-pixel text-xs text-yellow-300 mb-2">Use Arrow Keys to Move</p>
                         <div className="flex justify-center gap-2 text-white">
@@ -136,12 +169,13 @@ const WorldMap = ({ onNavigate }) => {
 
             {/* Interaction Prompt */}
             {activeZone && !showGame && (
-                <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-50">
+                <div className="absolute bottom-32 md:bottom-20 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none">
                     <div className="bg-black/80 p-4 rounded-lg border-2 border-yellow-500 text-center shadow-lg">
                         <p className="font-pixel text-sm text-white mb-1">Enter {activeZone.name}?</p>
                         <div className="flex items-center justify-center gap-2 text-yellow-300 font-pixel text-xs">
                             <CornerDownLeft size={16} />
-                            <span>Press ENTER</span>
+                            <span className="hidden md:inline">Press ENTER</span>
+                            <span className="md:hidden">Tap ACTION</span>
                         </div>
                     </div>
                 </div>
@@ -246,6 +280,70 @@ const WorldMap = ({ onNavigate }) => {
                     className={`w-44 h-44 md:w-52 md:h-52 object-contain drop-shadow-2xl transition-transform ${direction === 'left' ? 'scale-x-[-1]' : ''}`}
                 />
             </motion.div>
+
+            {/* Mobile Controls (D-Pad & Action) */}
+            <div className="md:hidden absolute bottom-8 left-8 z-50">
+                <div className="relative w-32 h-32 bg-black/30 rounded-full backdrop-blur-sm border border-white/10">
+                    {/* Up */}
+                    <button
+                        className="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-10 bg-slate-800/80 rounded-t-lg border border-slate-600 active:bg-blue-600 flex items-center justify-center"
+                        onPointerDown={() => setActiveButton('ArrowUp')}
+                        onPointerUp={() => setActiveButton(null)}
+                        onPointerLeave={() => setActiveButton(null)}
+                    >
+                        <ArrowUp size={20} className="text-white" />
+                    </button>
+                    {/* Down */}
+                    <button
+                        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-10 h-10 bg-slate-800/80 rounded-b-lg border border-slate-600 active:bg-blue-600 flex items-center justify-center"
+                        onPointerDown={() => setActiveButton('ArrowDown')}
+                        onPointerUp={() => setActiveButton(null)}
+                        onPointerLeave={() => setActiveButton(null)}
+                    >
+                        <ArrowDown size={20} className="text-white" />
+                    </button>
+                    {/* Left */}
+                    <button
+                        className="absolute top-1/2 left-0 -translate-y-1/2 w-10 h-10 bg-slate-800/80 rounded-l-lg border border-slate-600 active:bg-blue-600 flex items-center justify-center"
+                        onPointerDown={() => setActiveButton('ArrowLeft')}
+                        onPointerUp={() => setActiveButton(null)}
+                        onPointerLeave={() => setActiveButton(null)}
+                    >
+                        <ArrowLeft size={20} className="text-white" />
+                    </button>
+                    {/* Right */}
+                    <button
+                        className="absolute top-1/2 right-0 -translate-y-1/2 w-10 h-10 bg-slate-800/80 rounded-r-lg border border-slate-600 active:bg-blue-600 flex items-center justify-center"
+                        onPointerDown={() => setActiveButton('ArrowRight')}
+                        onPointerUp={() => setActiveButton(null)}
+                        onPointerLeave={() => setActiveButton(null)}
+                    >
+                        <ArrowRight size={20} className="text-white" />
+                    </button>
+                    {/* Center Decoration */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-slate-700 rounded-full border border-slate-500" />
+                </div>
+            </div>
+
+            {/* Action Button */}
+            <div className="md:hidden absolute bottom-8 right-8 z-50">
+                <button
+                    className={`w-20 h-20 rounded-full border-4 flex items-center justify-center shadow-lg transition-all active:scale-95 ${activeZone ? 'bg-yellow-600 border-yellow-400 animate-pulse' : 'bg-slate-800/80 border-slate-600'}`}
+                    onClick={() => {
+                        if (activeZone) {
+                            if (activeZone.id === 'easter-egg') {
+                                setShowGame(true);
+                            } else {
+                                onNavigate(activeZone.id);
+                            }
+                        }
+                    }}
+                >
+                    <span className="font-pixel text-white text-xs font-bold">
+                        {activeZone ? 'ENTER' : 'ACTION'}
+                    </span>
+                </button>
+            </div>
         </div>
     );
 };
