@@ -159,7 +159,7 @@ const WorldMap = ({ onNavigate }) => {
                     <img
                         src="/hornet750rpg.png"
                         alt="Motorcycle"
-                        className="absolute z-10 w-[15%] drop-shadow-lg cursor-pointer hover:scale-110 transition-transform duration-300"
+                        className="absolute z-10 w-40 drop-shadow-lg cursor-pointer hover:scale-110 transition-transform duration-300"
                         style={{
                             left: '10%',
                             top: '38%',
@@ -173,7 +173,7 @@ const WorldMap = ({ onNavigate }) => {
                     <img
                         src="/easter_egg.png"
                         alt="Easter Egg"
-                        className="absolute z-10 w-[22%] drop-shadow-md cursor-pointer animate-float hover:scale-110 transition-transform duration-300"
+                        className="absolute z-10 w-60 drop-shadow-md cursor-pointer animate-float hover:scale-110 transition-transform duration-300"
                         style={{
                             left: '10%',
                             top: '34%',
@@ -192,19 +192,19 @@ const WorldMap = ({ onNavigate }) => {
                             style={{
                                 top: `${zone.y}%`,
                                 left: `${zone.x}%`,
-                                width: '20%',
-                                height: '35%',
+                                width: '250px',
+                                height: '250px',
                                 transform: 'translate(-50%, -50%)',
                                 backgroundColor: 'transparent'
                             }}
                         >
                             {/* Always visible label */}
                             {!zone.hidden && (
-                                <div className="bg-black/60 p-[0.5vw] rounded border border-white/10 backdrop-blur-sm">
-                                    <p className="font-pixel text-[1.5cqw] md:text-sm text-white text-center whitespace-nowrap drop-shadow-md">
+                                <div className="bg-black/60 p-2 rounded border border-white/10 backdrop-blur-sm">
+                                    <p className="font-pixel text-sm text-white text-center whitespace-nowrap drop-shadow-md">
                                         {zone.name}
                                     </p>
-                                    <p className="font-pixel text-[1cqw] md:text-[10px] text-yellow-300 text-center mt-1">
+                                    <p className="font-pixel text-[10px] text-yellow-300 text-center mt-1">
                                         {zone.desc}
                                     </p>
                                 </div>
@@ -230,7 +230,7 @@ const WorldMap = ({ onNavigate }) => {
                         <img
                             src="/me_rpg.png"
                             alt="Player"
-                            className={`w-[15%] h-auto object-contain drop-shadow-2xl transition-transform ${direction === 'left' ? 'scale-x-[-1]' : ''}`}
+                            className={`w-44 h-44 md:w-52 md:h-52 object-contain drop-shadow-2xl transition-transform ${direction === 'left' ? 'scale-x-[-1]' : ''}`}
                         />
                     </motion.div>
                 </div>
