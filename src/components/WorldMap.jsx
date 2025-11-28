@@ -234,7 +234,7 @@ const WorldMap = ({ onNavigate }) => {
             {/* Welcome Message & Instructions */}
             <div className="absolute top-4 left-0 right-0 text-center z-10 pointer-events-none">
                 <h1 className="font-pixel text-xl md:text-4xl text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] mb-2">
-                    Diletta's World
+                    Welcome To My Personal Page, Explore!
                 </h1>
                 <p className="font-pixel text-xs md:text-sm text-yellow-300 animate-pulse drop-shadow-md">
                     <span className="hidden md:inline">Use Arrow Keys to Move</span>
