@@ -192,19 +192,19 @@ const WorldMap = ({ onNavigate }) => {
                             style={{
                                 top: `${zone.y}%`,
                                 left: `${zone.x}%`,
-                                width: '250px',
-                                height: '250px',
+                                width: '20%',
+                                height: '35%',
                                 transform: 'translate(-50%, -50%)',
                                 backgroundColor: 'transparent'
                             }}
                         >
                             {/* Always visible label */}
                             {!zone.hidden && (
-                                <div className="bg-black/60 p-2 rounded border border-white/10 backdrop-blur-sm">
-                                    <p className="font-pixel text-sm text-white text-center whitespace-nowrap drop-shadow-md">
+                                <div className="bg-black/60 p-1 md:p-2 rounded border border-white/10 backdrop-blur-sm">
+                                    <p className="font-pixel text-xs md:text-sm text-white text-center whitespace-nowrap drop-shadow-md">
                                         {zone.name}
                                     </p>
-                                    <p className="font-pixel text-[10px] text-yellow-300 text-center mt-1">
+                                    <p className="font-pixel text-[8px] md:text-[10px] text-yellow-300 text-center mt-1">
                                         {zone.desc}
                                     </p>
                                 </div>
