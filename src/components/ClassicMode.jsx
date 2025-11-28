@@ -20,10 +20,10 @@ const ClassicMode = ({ onSwitchToRPG }) => {
                                     <p className="text-slate-500">University of Turin</p>
                                 </div>
                                 <p className="text-slate-700 leading-relaxed">
-                                    Greetings, traveler! I am currently a <strong>Postdoctoral Researcher</strong> at the Department of Culture, Politics and Society, <strong>University of Turin</strong>.
+                                    I am a Postdoctoral Researcher at the Department of Culture, Politics and Society, University of Turin.
                                 </p>
                                 <p className="text-slate-700 leading-relaxed">
-                                    My current quest involves "Science technology relationships in the development of AI in the health sector", under the guidance of Prof. Aldo Geuna.
+                                    My research focuses on "Science technology relationships in the development of AI in the health sector", under the guidance of Prof. Aldo Geuna.
                                 </p>
                                 <p className="text-slate-700 leading-relaxed">
                                     My skills lie in Innovation, Industrial Dynamics, and Econometrics. I apply Machine Learning and NLP techniques to investigate diverse realms: Scientometrics, Labor Markets, and Social Phenomena.
