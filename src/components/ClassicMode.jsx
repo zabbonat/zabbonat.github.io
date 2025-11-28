@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Github, Linkedin, Mail, FileText, Download, ExternalLink, MapPin, Clock, Lightbulb } from 'lucide-react';
+import { Github, Linkedin, Mail, FileText, Download, ExternalLink, MapPin, Clock, Lightbulb, Menu, X } from 'lucide-react';
 
 const ClassicMode = ({ onSwitchToRPG }) => {
     const [activeTab, setActiveTab] = useState('home');
@@ -293,18 +293,28 @@ const ClassicMode = ({ onSwitchToRPG }) => {
         }
     };
 
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
     return (
         <div className={`min-h-screen ${theme.bg} ${theme.text} font-sans selection:bg-blue-100 transition-colors duration-300`}>
             {/* Header */}
             <header className={`fixed top-0 left-0 w-full ${theme.headerBg} backdrop-blur-md border-b ${theme.border} z-50 transition-colors duration-300`}>
                 <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
                     <div className="flex items-center gap-4">
+                        {/* Mobile Menu Button */}
+                        <button
+                            className="md:hidden p-2"
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        >
+                            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                        </button>
+
                         <button
                             onClick={toggleDarkMode}
                             className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${isDarkMode ? 'bg-slate-800 border-slate-700 text-yellow-400 hover:bg-slate-700' : 'bg-slate-100 border-slate-200 text-slate-600 hover:bg-slate-200'}`}
                         >
                             <Lightbulb size={14} className={isDarkMode ? 'fill-yellow-400' : ''} />
-                            {isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+                            <span className="hidden sm:inline">{isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}</span>
                         </button>
                         <h1 className="text-xl font-bold tracking-tight cursor-pointer hidden sm:block" onClick={() => setActiveTab('home')}>
                             Diletta Abbonato
@@ -312,6 +322,7 @@ const ClassicMode = ({ onSwitchToRPG }) => {
                     </div>
 
                     <div className="flex items-center gap-4">
+                        {/* Desktop Nav */}
                         <nav className="hidden md:flex items-center gap-8 text-xl font-medium text-slate-600">
                             {[
                                 { id: 'home', label: 'Home' },
@@ -341,6 +352,35 @@ const ClassicMode = ({ onSwitchToRPG }) => {
                         </button>
                     </div>
                 </div>
+
+                {/* Mobile Nav Overlay */}
+                {isMenuOpen && (
+                    <div className={`md:hidden absolute top-16 left-0 w-full ${theme.bg} border-b ${theme.border} shadow-lg animate-in slide-in-from-top-5`}>
+                        <nav className="flex flex-col p-4 space-y-2">
+                            {[
+                                { id: 'home', label: 'Home' },
+                                { id: 'research', label: 'Research Tools' },
+                                { id: 'publications', label: 'Publications' },
+                                { id: 'teaching', label: 'Teaching' },
+                                { id: 'cv', label: 'CV' }
+                            ].map((item) => (
+                                <button
+                                    key={item.id}
+                                    onClick={() => {
+                                        setActiveTab(item.id);
+                                        setIsMenuOpen(false);
+                                    }}
+                                    className={`text-left px-4 py-3 rounded-lg font-medium transition-colors ${activeTab === item.id
+                                        ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400'
+                                        : `${theme.text} hover:bg-slate-100 dark:hover:bg-slate-800`
+                                        }`}
+                                >
+                                    {item.label}
+                                </button>
+                            ))}
+                        </nav>
+                    </div>
+                )}
             </header>
 
             <main className="max-w-3xl mx-auto px-6 pt-32 pb-20">
