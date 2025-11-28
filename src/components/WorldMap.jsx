@@ -3,11 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUp, ArrowDown, ArrowLeft, ArrowRight, CornerDownLeft } from 'lucide-react';
 import TenureRoadGame from './TenureRoadGame';
 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUp, ArrowDown, ArrowLeft, ArrowRight, CornerDownLeft } from 'lucide-react';
-import TenureRoadGame from './TenureRoadGame';
-
 const WorldMap = ({ onNavigate }) => {
     const [position, setPosition] = useState({ x: 50, y: 50 });
     const [direction, setDirection] = useState('down');
