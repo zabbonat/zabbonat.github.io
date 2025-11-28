@@ -11,6 +11,11 @@ const WorldMap = ({ onNavigate }) => {
     const [showGame, setShowGame] = useState(false);
     const [showWelcome, setShowWelcome] = useState(true);
 
+    // Motorcycle State
+    const [isRiding, setIsRiding] = useState(false);
+    const [bikePosition, setBikePosition] = useState({ x: 10, y: 38 }); // Initial position matching original img style
+    const [nearBike, setNearBike] = useState(false);
+
     useEffect(() => {
         const timer = setTimeout(() => {
             setShowWelcome(false);
@@ -30,7 +35,9 @@ const WorldMap = ({ onNavigate }) => {
     ];
 
     // Movement speed
-    const SPEED = 1.5;
+    const WALK_SPEED = 1.5;
+    const BIKE_SPEED = 3.0;
+    const currentSpeed = isRiding ? BIKE_SPEED : WALK_SPEED;
 
     // Movement logic
     const updatePosition = (key) => {
@@ -41,19 +48,19 @@ const WorldMap = ({ onNavigate }) => {
             switch (key) {
                 case 'ArrowUp':
                 case 'w':
-                    newY = Math.max(0, prev.y - SPEED);
+                    newY = Math.max(0, prev.y - currentSpeed);
                     break;
                 case 'ArrowDown':
                 case 's':
-                    newY = Math.min(100, prev.y + SPEED);
+                    newY = Math.min(100, prev.y + currentSpeed);
                     break;
                 case 'ArrowLeft':
                 case 'a':
-                    newX = Math.max(0, prev.x - SPEED);
+                    newX = Math.max(0, prev.x - currentSpeed);
                     break;
                 case 'ArrowRight':
                 case 'd':
-                    newX = Math.min(100, prev.x + SPEED);
+                    newX = Math.min(100, prev.x + currentSpeed);
                     break;
                 default:
                     return prev;
@@ -87,7 +94,19 @@ const WorldMap = ({ onNavigate }) => {
             if (!activeButton) setIsMoving(false);
         }
         return () => clearInterval(interval);
-    }, [activeButton]);
+    }, [activeButton, isRiding]); // Added isRiding to dependency to update speed
+
+    // Toggle Bike Mount/Dismount
+    const toggleBike = () => {
+        if (isRiding) {
+            // Dismount
+            setIsRiding(false);
+            setBikePosition({ x: position.x, y: position.y });
+        } else if (nearBike) {
+            // Mount
+            setIsRiding(true);
+        }
+    };
 
     useEffect(() => {
         const handleKeyDown = (e) => {
@@ -103,6 +122,8 @@ const WorldMap = ({ onNavigate }) => {
                     } else {
                         onNavigate(activeZone.id);
                     }
+                } else if (nearBike || isRiding) {
+                    toggleBike();
                 }
                 return;
             }
@@ -125,9 +146,9 @@ const WorldMap = ({ onNavigate }) => {
             window.removeEventListener('keydown', handleKeyDown);
             window.removeEventListener('keyup', handleKeyUp);
         };
-    }, [activeZone, onNavigate, showGame]);
+    }, [activeZone, onNavigate, showGame, nearBike, isRiding, position]);
 
-    // Check collisions
+    // Check collisions & Bike Proximity
     useEffect(() => {
         let foundZone = null;
         zones.forEach((zone) => {
@@ -140,7 +161,19 @@ const WorldMap = ({ onNavigate }) => {
             }
         });
         setActiveZone(foundZone);
-    }, [position]);
+
+        // Check bike proximity
+        if (!isRiding) {
+            const dx = position.x - bikePosition.x;
+            const dy = position.y - bikePosition.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            // Radius for bike interaction
+            setNearBike(distance < 5);
+        } else {
+            setNearBike(false);
+        }
+
+    }, [position, isRiding, bikePosition]);
 
     return (
         <div className="relative w-full h-screen bg-black overflow-hidden">
@@ -159,19 +192,23 @@ const WorldMap = ({ onNavigate }) => {
                         }}
                     />
 
-                    {/* Motorcycle (Easter Egg) */}
-                    <img
-                        src="/hornet750rpg.png"
-                        alt="Motorcycle"
-                        className="absolute z-10 w-40 drop-shadow-lg cursor-pointer hover:scale-110 transition-transform duration-300"
-                        style={{
-                            left: '10%',
-                            top: '38%',
-                            transform: 'translate(-50%, -50%)'
-                        }}
-                        onClick={() => setShowGame(true)}
-                        title="Start Engine?"
-                    />
+                    {/* Motorcycle (Static Object) */}
+                    {!isRiding && (
+                        <img
+                            src="/hornet750rpg.png"
+                            alt="Motorcycle"
+                            className={`absolute z-10 w-40 drop-shadow-lg transition-transform duration-300 ${nearBike ? 'scale-110 brightness-125' : ''}`}
+                            style={{
+                                left: `${bikePosition.x}%`,
+                                top: `${bikePosition.y}%`,
+                                transform: 'translate(-50%, -50%)'
+                            }}
+                            onClick={() => {
+                                if (nearBike) toggleBike();
+                            }}
+                            title={nearBike ? "Ride Motorcycle" : "Get closer to ride"}
+                        />
+                    )}
 
                     {/* Easter Egg Indicator */}
                     <img
@@ -232,9 +269,9 @@ const WorldMap = ({ onNavigate }) => {
                         }}
                     >
                         <img
-                            src="/me_rpg.png"
+                            src={isRiding ? "/hornet750rpg.png" : "/me_rpg.png"}
                             alt="Player"
-                            className={`w-44 h-44 md:w-52 md:h-52 object-contain drop-shadow-2xl transition-transform ${direction === 'left' ? 'scale-x-[-1]' : ''}`}
+                            className={`${isRiding ? 'w-48 h-48' : 'w-44 h-44'} md:w-52 md:h-52 object-contain drop-shadow-2xl transition-transform ${direction === 'left' ? 'scale-x-[-1]' : ''}`}
                         />
                     </motion.div>
                 </div>
@@ -285,6 +322,20 @@ const WorldMap = ({ onNavigate }) => {
                     <div className="bg-black/80 p-4 rounded-lg border-2 border-yellow-500 text-center shadow-lg">
                         <p className="font-pixel text-sm text-white mb-1">Enter {activeZone.name}?</p>
                         <div className="flex items-center justify-center gap-2 text-yellow-300 font-pixel text-xs">
+                            <CornerDownLeft size={16} />
+                            <span className="hidden md:inline">Press ENTER</span>
+                            <span className="md:hidden">Tap ACTION</span>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Bike Interaction Prompt */}
+            {(nearBike || isRiding) && !activeZone && !showGame && (
+                <div className="absolute bottom-32 md:bottom-20 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none">
+                    <div className="bg-black/80 p-4 rounded-lg border-2 border-blue-500 text-center shadow-lg">
+                        <p className="font-pixel text-sm text-white mb-1">{isRiding ? "Dismount Bike?" : "Ride Bike?"}</p>
+                        <div className="flex items-center justify-center gap-2 text-blue-300 font-pixel text-xs">
                             <CornerDownLeft size={16} />
                             <span className="hidden md:inline">Press ENTER</span>
                             <span className="md:hidden">Tap ACTION</span>
@@ -354,7 +405,7 @@ const WorldMap = ({ onNavigate }) => {
             {/* Action Button */}
             <div className="md:hidden absolute bottom-8 right-8 z-50">
                 <button
-                    className={`w-20 h-20 rounded-full border-4 flex items-center justify-center shadow-lg transition-all active:scale-95 ${activeZone ? 'bg-yellow-600 border-yellow-400 animate-pulse' : 'bg-slate-800/80 border-slate-600'}`}
+                    className={`w-20 h-20 rounded-full border-4 flex items-center justify-center shadow-lg transition-all active:scale-95 ${activeZone ? 'bg-yellow-600 border-yellow-400 animate-pulse' : (nearBike || isRiding) ? 'bg-blue-600 border-blue-400 animate-pulse' : 'bg-slate-800/80 border-slate-600'}`}
                     onClick={() => {
                         if (activeZone) {
                             if (activeZone.id === 'easter-egg') {
@@ -362,11 +413,13 @@ const WorldMap = ({ onNavigate }) => {
                             } else {
                                 onNavigate(activeZone.id);
                             }
+                        } else if (nearBike || isRiding) {
+                            toggleBike();
                         }
                     }}
                 >
                     <span className="font-pixel text-white text-xs font-bold">
-                        {activeZone ? 'ENTER' : 'ACTION'}
+                        {activeZone ? 'ENTER' : (nearBike || isRiding) ? (isRiding ? 'EXIT' : 'RIDE') : 'ACTION'}
                     </span>
                 </button>
             </div>
