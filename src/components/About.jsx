@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Mail } from 'lucide-react';
 
 const About = () => {
     return (
@@ -87,6 +88,14 @@ const About = () => {
                                 <p className="font-pixel text-[10px] text-slate-400">Economics</p>
                             </div>
                         </div>
+
+                        <a href="mailto:diletta.abbonato@unito.it" className="block mt-4 p-4 bg-slate-900 rounded border-2 border-slate-700 text-center group hover:border-yellow-500 transition-colors">
+                            <div className="flex items-center justify-center gap-2 text-yellow-500 mb-1">
+                                <Mail size={20} />
+                                <h4 className="font-pixel text-lg">Let's keep in touch</h4>
+                            </div>
+                            <p className="font-pixel text-[10px] text-slate-400">diletta.abbonato@unito.it</p>
+                        </a>
                     </motion.div>
                 </div>
             </div>
