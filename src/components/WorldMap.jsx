@@ -298,7 +298,7 @@ const WorldMap = ({ onNavigate }) => {
                                     initial={{ opacity: 0, scale: 0.8, y: 10 }}
                                     animate={{ opacity: 1, scale: 1, y: 0 }}
                                     exit={{ opacity: 0, scale: 0.8, y: 10 }}
-                                    className="absolute left-full top-0 ml-4 w-64 bg-white border-4 border-black p-4 rounded-lg shadow-xl z-50 pointer-events-auto"
+                                    className="absolute right-full top-0 mr-4 w-64 bg-white border-4 border-black p-4 rounded-lg shadow-xl z-50 pointer-events-auto"
                                 >
                                     <div className="font-pixel text-xs md:text-sm text-black leading-relaxed">
                                         {dialogLines[dialogStep]}
