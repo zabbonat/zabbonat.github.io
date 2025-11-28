@@ -9,19 +9,23 @@ const WorldMap = ({ onNavigate }) => {
     const [isMoving, setIsMoving] = useState(false);
     const [activeZone, setActiveZone] = useState(null);
     const [showGame, setShowGame] = useState(false);
-    const [showWelcome, setShowWelcome] = useState(true);
+
+    // Dialog State
+    const [showDialog, setShowDialog] = useState(true);
+    const [dialogStep, setDialogStep] = useState(0);
+
+    const dialogLines = [
+        "Welcome to my personal page, explore!",
+        "You can move using the arrow keys, click on buildings, or access the Classical CV here.",
+        "Try to discover the Easter Egg!",
+        "P.S. There is also another way to explore the map...",
+        "You can also access the Classical CV by clicking 'Classical View' or the wheel icon."
+    ];
 
     // Motorcycle State
     const [isRiding, setIsRiding] = useState(false);
     const [bikePosition, setBikePosition] = useState({ x: 10, y: 38 }); // Initial position matching original img style
     const [nearBike, setNearBike] = useState(false);
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setShowWelcome(false);
-        }, 8000);
-        return () => clearTimeout(timer);
-    }, []);
 
     // Zones mapped to user's 'world_map_clean.png'
     const zones = [
@@ -108,6 +112,14 @@ const WorldMap = ({ onNavigate }) => {
         }
     };
 
+    const advanceDialog = () => {
+        if (dialogStep < dialogLines.length - 1) {
+            setDialogStep(prev => prev + 1);
+        } else {
+            setShowDialog(false);
+        }
+    };
+
     useEffect(() => {
         const handleKeyDown = (e) => {
             // Prevent default scrolling for arrow keys
@@ -116,6 +128,11 @@ const WorldMap = ({ onNavigate }) => {
             }
 
             if (e.key === 'Enter') {
+                if (showDialog) {
+                    advanceDialog();
+                    return;
+                }
+
                 // Prioritize Bike Interaction
                 if (nearBike || isRiding) {
                     toggleBike();
@@ -129,8 +146,8 @@ const WorldMap = ({ onNavigate }) => {
                 return;
             }
 
-            // Disable movement if game is open
-            if (showGame) return;
+            // Disable movement if game is open or dialog is showing
+            if (showGame || showDialog) return;
 
             setIsMoving(true);
             handleMoveInput(e.key);
@@ -147,7 +164,7 @@ const WorldMap = ({ onNavigate }) => {
             window.removeEventListener('keydown', handleKeyDown);
             window.removeEventListener('keyup', handleKeyUp);
         };
-    }, [activeZone, onNavigate, showGame, nearBike, isRiding, position]);
+    }, [activeZone, onNavigate, showGame, nearBike, isRiding, position, showDialog, dialogStep]);
 
     // Check collisions & Bike Proximity
     useEffect(() => {
@@ -168,8 +185,8 @@ const WorldMap = ({ onNavigate }) => {
             const dx = position.x - bikePosition.x;
             const dy = position.y - bikePosition.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
-            // Radius for bike interaction
-            setNearBike(distance < 5);
+            // Radius for bike interaction - Tightened to 6
+            setNearBike(distance < 6);
         } else {
             setNearBike(false);
         }
@@ -270,39 +287,45 @@ const WorldMap = ({ onNavigate }) => {
                         }}
                     >
                         <img
-                            src={isRiding ? "/hornet750rpg.png" : "/me_rpg.png"}
+                            src={isRiding ? "/ride_moto.png" : "/me_rpg.png"}
                             alt="Player"
                             className={`${isRiding ? 'w-48 h-48' : 'w-44 h-44'} md:w-52 md:h-52 object-contain drop-shadow-2xl transition-transform ${direction === 'left' ? 'scale-x-[-1]' : ''}`}
                         />
+
+                        {/* Dialog Box (Relative to Player) */}
+                        <AnimatePresence>
+                            {showDialog && (
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                                    exit={{ opacity: 0, scale: 0.8, y: 10 }}
+                                    className="absolute left-full top-0 ml-4 w-64 bg-white border-4 border-black p-4 rounded-lg shadow-xl z-50 pointer-events-auto"
+                                >
+                                    <div className="font-pixel text-xs md:text-sm text-black leading-relaxed">
+                                        {dialogLines[dialogStep]}
+                                    </div>
+                                    <div className="mt-2 flex justify-end">
+                                        <div className="animate-bounce text-black font-bold">▼</div>
+                                    </div>
+                                    {/* Mobile Tap to Advance */}
+                                    <div
+                                        className="absolute inset-0 z-50 md:hidden"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            advanceDialog();
+                                        }}
+                                    />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </motion.div>
                 </div>
             </div>
 
             {/* UI LAYOUT (Fixed Overlay) */}
 
-            {/* Welcome Message & Instructions */}
-            <AnimatePresence>
-                {showWelcome && (
-                    <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.5 }}
-                        className="absolute top-4 left-0 right-0 text-center z-10 pointer-events-none"
-                    >
-                        <h1 className="font-pixel text-lg md:text-3xl text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] mb-2">
-                            Welcome To My Personal Page, Explore!
-                        </h1>
-                        <p className="font-pixel text-[10px] md:text-xs text-yellow-300 animate-pulse drop-shadow-md">
-                            <span className="hidden md:inline">Use Arrow Keys to Move</span>
-                            <span className="md:hidden">Use Controls to Move (Scroll to see full map)</span>
-                        </p>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-
             {/* Instructions Overlay (Desktop) */}
-            {!isMoving && !activeZone && !showGame && (
+            {!isMoving && !activeZone && !showGame && !showDialog && (
                 <div className="hidden md:block absolute top-20 left-1/2 transform -translate-x-1/2 text-center z-10 pointer-events-none animate-pulse">
                     <div className="bg-black/50 p-4 rounded-lg backdrop-blur-sm border border-white/20">
                         <div className="flex justify-center gap-2 text-white">
@@ -318,7 +341,7 @@ const WorldMap = ({ onNavigate }) => {
             )}
 
             {/* Interaction Prompt */}
-            {activeZone && !showGame && !nearBike && !isRiding && (
+            {activeZone && !showGame && !nearBike && !isRiding && !showDialog && (
                 <div className="absolute bottom-32 md:bottom-20 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none">
                     <div className="bg-black/80 p-4 rounded-lg border-2 border-yellow-500 text-center shadow-lg">
                         <p className="font-pixel text-sm text-white mb-1">Enter {activeZone.name}?</p>
@@ -332,7 +355,7 @@ const WorldMap = ({ onNavigate }) => {
             )}
 
             {/* Bike Interaction Prompt */}
-            {(nearBike || isRiding) && !showGame && (
+            {(nearBike || isRiding) && !showGame && !showDialog && (
                 <div className="absolute bottom-32 md:bottom-20 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none">
                     <div className="bg-black/80 p-4 rounded-lg border-2 border-blue-500 text-center shadow-lg">
                         <p className="font-pixel text-sm text-white mb-1">{isRiding ? "Dismount Bike?" : "Ride Bike?"}</p>
@@ -408,7 +431,9 @@ const WorldMap = ({ onNavigate }) => {
                 <button
                     className={`w-20 h-20 rounded-full border-4 flex items-center justify-center shadow-lg transition-all active:scale-95 ${activeZone ? 'bg-yellow-600 border-yellow-400 animate-pulse' : (nearBike || isRiding) ? 'bg-blue-600 border-blue-400 animate-pulse' : 'bg-slate-800/80 border-slate-600'}`}
                     onClick={() => {
-                        if (nearBike || isRiding) {
+                        if (showDialog) {
+                            advanceDialog();
+                        } else if (nearBike || isRiding) {
                             toggleBike();
                         } else if (activeZone) {
                             if (activeZone.id === 'easter-egg') {
@@ -420,7 +445,7 @@ const WorldMap = ({ onNavigate }) => {
                     }}
                 >
                     <span className="font-pixel text-white text-xs font-bold">
-                        {(nearBike || isRiding) ? (isRiding ? 'EXIT' : 'RIDE') : activeZone ? 'ENTER' : 'ACTION'}
+                        {showDialog ? 'NEXT' : (nearBike || isRiding) ? (isRiding ? 'EXIT' : 'RIDE') : activeZone ? 'ENTER' : 'ACTION'}
                     </span>
                 </button>
             </div>
