@@ -140,98 +140,95 @@ const WorldMap = ({ onNavigate }) => {
     }, [position]);
 
     return (
+    return (
         <div className="relative w-full h-screen bg-black overflow-hidden flex items-center justify-center select-none touch-none">
+            {/* Map Background */}
+            <div
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                style={{
+                    backgroundImage: "url('/world_map169.png')",
+                    imageRendering: 'pixelated'
+                }}
+            />
 
-            {/* Map Container - Maintains 16:9 Aspect Ratio */}
-            <div className="relative w-full max-w-[177.78vh] aspect-video shadow-2xl overflow-hidden">
-                {/* Map Background */}
+            {/* Motorcycle (Easter Egg) */}
+            <img
+                src="/hornet750rpg.png"
+                alt="Motorcycle"
+                className="absolute z-10 w-40 drop-shadow-lg cursor-pointer hover:scale-110 transition-transform duration-300"
+                style={{
+                    left: '10%',
+                    top: '38%',
+                    transform: 'translate(-50%, -50%)'
+                }}
+                onClick={() => setShowGame(true)}
+                title="Start Engine?"
+            />
+
+            {/* Easter Egg Indicator */}
+            <img
+                src="/easter_egg.png"
+                alt="Easter Egg"
+                className="absolute z-10 w-60 drop-shadow-md cursor-pointer animate-float hover:scale-110 transition-transform duration-300"
+                style={{
+                    left: '10%',
+                    top: '34%',
+                    transform: 'translate(-50%, -50%)'
+                }}
+                onClick={() => setShowGame(true)}
+                title="Click me!"
+            />
+
+            {/* Interactive Zones */}
+            {zones.map((zone) => (
                 <div
-                    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                    key={zone.id}
+                    onClick={() => onNavigate(zone.id)}
+                    className="absolute flex items-center justify-center z-0 cursor-pointer group"
                     style={{
-                        backgroundImage: "url('/world_map169.png')",
-                        imageRendering: 'pixelated'
-                    }}
-                />
-
-                {/* Motorcycle (Easter Egg) */}
-                <img
-                    src="/hornet750rpg.png"
-                    alt="Motorcycle"
-                    className="absolute z-10 w-[15%] drop-shadow-lg cursor-pointer hover:scale-110 transition-transform duration-300"
-                    style={{
-                        left: '10%',
-                        top: '38%',
-                        transform: 'translate(-50%, -50%)'
-                    }}
-                    onClick={() => setShowGame(true)}
-                    title="Start Engine?"
-                />
-
-                {/* Easter Egg Indicator */}
-                <img
-                    src="/easter_egg.png"
-                    alt="Easter Egg"
-                    className="absolute z-10 w-[22%] drop-shadow-md cursor-pointer animate-float hover:scale-110 transition-transform duration-300"
-                    style={{
-                        left: '10%',
-                        top: '34%',
-                        transform: 'translate(-50%, -50%)'
-                    }}
-                    onClick={() => setShowGame(true)}
-                    title="Click me!"
-                />
-
-                {/* Interactive Zones */}
-                {zones.map((zone) => (
-                    <div
-                        key={zone.id}
-                        onClick={() => onNavigate(zone.id)}
-                        className="absolute flex items-center justify-center z-0 cursor-pointer group"
-                        style={{
-                            top: `${zone.y}%`,
-                            left: `${zone.x}%`,
-                            width: '20%', // Relative size
-                            height: '35%', // Relative size
-                            transform: 'translate(-50%, -50%)',
-                            backgroundColor: 'transparent'
-                        }}
-                    >
-                        {/* Always visible label */}
-                        {!zone.hidden && (
-                            <div className="bg-black/60 p-[0.5vw] rounded border border-white/10 backdrop-blur-sm">
-                                <p className="font-pixel text-[1.5cqw] md:text-sm text-white text-center whitespace-nowrap drop-shadow-md">
-                                    {zone.name}
-                                </p>
-                                <p className="font-pixel text-[1cqw] md:text-[10px] text-yellow-300 text-center mt-1">
-                                    {zone.desc}
-                                </p>
-                            </div>
-                        )}
-                    </div>
-                ))}
-
-                {/* Player Avatar */}
-                <motion.div
-                    className="absolute z-30 flex flex-col items-center pointer-events-none"
-                    style={{
-                        top: `${position.y}%`,
-                        left: `${position.x}%`,
-                        transform: 'translate(-50%, -50%)'
-                    }}
-                    animate={{
-                        y: isMoving ? [0, -5, 0] : 0,
-                    }}
-                    transition={{
-                        y: { duration: 0.2, repeat: isMoving ? Infinity : 0 }
+                        top: `${zone.y}%`,
+                        left: `${zone.x}%`,
+                        width: '250px',
+                        height: '250px',
+                        transform: 'translate(-50%, -50%)',
+                        backgroundColor: 'transparent'
                     }}
                 >
-                    <img
-                        src="/me_rpg.png"
-                        alt="Player"
-                        className={`w-[15%] h-auto object-contain drop-shadow-2xl transition-transform ${direction === 'left' ? 'scale-x-[-1]' : ''}`}
-                    />
-                </motion.div>
-            </div>
+                    {/* Always visible label */}
+                    {!zone.hidden && (
+                        <div className="bg-black/60 p-2 rounded border border-white/10 backdrop-blur-sm">
+                            <p className="font-pixel text-sm text-white text-center whitespace-nowrap drop-shadow-md">
+                                {zone.name}
+                            </p>
+                            <p className="font-pixel text-[10px] text-yellow-300 text-center mt-1">
+                                {zone.desc}
+                            </p>
+                        </div>
+                    )}
+                </div>
+            ))}
+
+            {/* Player Avatar */}
+            <motion.div
+                className="absolute z-30 flex flex-col items-center pointer-events-none"
+                style={{
+                    top: `${position.y}%`,
+                    left: `${position.x}%`,
+                    transform: 'translate(-50%, -50%)'
+                }}
+                animate={{
+                    y: isMoving ? [0, -5, 0] : 0,
+                }}
+                transition={{
+                    y: { duration: 0.2, repeat: isMoving ? Infinity : 0 }
+                }}
+            >
+                <img
+                    src="/me_rpg.png"
+                    alt="Player"
+                    className={`w-44 h-44 md:w-52 md:h-52 object-contain drop-shadow-2xl transition-transform ${direction === 'left' ? 'scale-x-[-1]' : ''}`}
+                />
+            </motion.div>
 
             {/* UI LAYOUT (Overlaying the screen) */}
 
