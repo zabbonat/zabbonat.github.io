@@ -116,14 +116,15 @@ const WorldMap = ({ onNavigate }) => {
             }
 
             if (e.key === 'Enter') {
-                if (activeZone) {
+                // Prioritize Bike Interaction
+                if (nearBike || isRiding) {
+                    toggleBike();
+                } else if (activeZone) {
                     if (activeZone.id === 'easter-egg') {
                         setShowGame(true);
                     } else {
                         onNavigate(activeZone.id);
                     }
-                } else if (nearBike || isRiding) {
-                    toggleBike();
                 }
                 return;
             }
@@ -317,7 +318,7 @@ const WorldMap = ({ onNavigate }) => {
             )}
 
             {/* Interaction Prompt */}
-            {activeZone && !showGame && (
+            {activeZone && !showGame && !nearBike && !isRiding && (
                 <div className="absolute bottom-32 md:bottom-20 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none">
                     <div className="bg-black/80 p-4 rounded-lg border-2 border-yellow-500 text-center shadow-lg">
                         <p className="font-pixel text-sm text-white mb-1">Enter {activeZone.name}?</p>
@@ -331,7 +332,7 @@ const WorldMap = ({ onNavigate }) => {
             )}
 
             {/* Bike Interaction Prompt */}
-            {(nearBike || isRiding) && !activeZone && !showGame && (
+            {(nearBike || isRiding) && !showGame && (
                 <div className="absolute bottom-32 md:bottom-20 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none">
                     <div className="bg-black/80 p-4 rounded-lg border-2 border-blue-500 text-center shadow-lg">
                         <p className="font-pixel text-sm text-white mb-1">{isRiding ? "Dismount Bike?" : "Ride Bike?"}</p>
@@ -407,19 +408,19 @@ const WorldMap = ({ onNavigate }) => {
                 <button
                     className={`w-20 h-20 rounded-full border-4 flex items-center justify-center shadow-lg transition-all active:scale-95 ${activeZone ? 'bg-yellow-600 border-yellow-400 animate-pulse' : (nearBike || isRiding) ? 'bg-blue-600 border-blue-400 animate-pulse' : 'bg-slate-800/80 border-slate-600'}`}
                     onClick={() => {
-                        if (activeZone) {
+                        if (nearBike || isRiding) {
+                            toggleBike();
+                        } else if (activeZone) {
                             if (activeZone.id === 'easter-egg') {
                                 setShowGame(true);
                             } else {
                                 onNavigate(activeZone.id);
                             }
-                        } else if (nearBike || isRiding) {
-                            toggleBike();
                         }
                     }}
                 >
                     <span className="font-pixel text-white text-xs font-bold">
-                        {activeZone ? 'ENTER' : (nearBike || isRiding) ? (isRiding ? 'EXIT' : 'RIDE') : 'ACTION'}
+                        {(nearBike || isRiding) ? (isRiding ? 'EXIT' : 'RIDE') : activeZone ? 'ENTER' : 'ACTION'}
                     </span>
                 </button>
             </div>
