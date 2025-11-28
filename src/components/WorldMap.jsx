@@ -140,7 +140,6 @@ const WorldMap = ({ onNavigate }) => {
     }, [position]);
 
     return (
-    return (
         <div className="relative w-full h-screen bg-black overflow-hidden flex items-center justify-center select-none touch-none">
 
             {/* Map Container - Maintains 16:9 Aspect Ratio */}
@@ -236,42 +235,15 @@ const WorldMap = ({ onNavigate }) => {
 
             {/* UI LAYOUT (Overlaying the screen) */}
 
-            {/* Instructions Overlay (Desktop) */}
-            {!isMoving && !activeZone && !showGame && (
-                <div className="hidden md:block absolute top-20 left-1/2 transform -translate-x-1/2 text-center z-10 pointer-events-none animate-pulse">
-                    <div className="bg-black/50 p-4 rounded-lg backdrop-blur-sm border border-white/20">
-                        <p className="font-pixel text-xs text-yellow-300 mb-2">Use Arrow Keys to Move</p>
-                        <div className="flex justify-center gap-2 text-white">
-                            <ArrowLeft size={16} />
-                            <div className="flex flex-col gap-1">
-                                <ArrowUp size={16} />
-                                <ArrowDown size={16} />
-                            </div>
-                            <ArrowRight size={16} />
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            {/* Interaction Prompt */}
-            {activeZone && !showGame && (
-                <div className="absolute bottom-32 md:bottom-20 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none">
-                    <div className="bg-black/80 p-4 rounded-lg border-2 border-yellow-500 text-center shadow-lg">
-                        <p className="font-pixel text-sm text-white mb-1">Enter {activeZone.name}?</p>
-                        <div className="flex items-center justify-center gap-2 text-yellow-300 font-pixel text-xs">
-                            <CornerDownLeft size={16} />
-                            <span className="hidden md:inline">Press ENTER</span>
-                            <span className="md:hidden">Tap ACTION</span>
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            {/* Welcome Message */}
+            {/* Welcome Message & Instructions */}
             <div className="absolute top-4 left-0 right-0 text-center z-10 pointer-events-none">
-                <h1 className="font-pixel text-xl md:text-4xl text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]">
-                    Welcome to Diletta's World
+                <h1 className="font-pixel text-xl md:text-4xl text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] mb-2">
+                    Diletta's World
                 </h1>
+                <p className="font-pixel text-xs md:text-sm text-yellow-300 animate-pulse drop-shadow-md">
+                    <span className="hidden md:inline">Use Arrow Keys to Move</span>
+                    <span className="md:hidden">Use Controls to Move</span>
+                </p>
             </div>
 
             {/* Tenure Road Game Overlay */}
