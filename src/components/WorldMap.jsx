@@ -133,230 +133,111 @@ const WorldMap = ({ onNavigate }) => {
             const distance = Math.sqrt(dx * dx + dy * dy);
 
             if (distance < zone.radius) {
-                foundZone = zone;
-            }
-        });
-        setActiveZone(foundZone);
-    }, [position]);
-
-    return (
-        <div className="relative w-full h-screen bg-black overflow-hidden">
-
-            {/* Scrollable Map Area */}
-            <div className="w-full h-full overflow-auto md:overflow-hidden flex items-center justify-center">
-                {/* Map Wrapper - Enforces Aspect Ratio & Full Height */}
-                <div className="relative h-full aspect-video min-w-[177.78vh] md:min-w-0 md:w-full md:h-auto md:aspect-video shadow-2xl">
-                    {/* Map Background */}
-                    <div
-                        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                        style={{
-                            backgroundImage: "url('/world_map169.png')",
-                            imageRendering: 'pixelated'
-                        }}
-                    />
-
-                    {/* Motorcycle (Easter Egg) */}
-                    <img
-                        src="/hornet750rpg.png"
-                        alt="Motorcycle"
-                        className="absolute z-10 w-40 drop-shadow-lg cursor-pointer hover:scale-110 transition-transform duration-300"
-                        style={{
-                            left: '10%',
-                            top: '50%',
-                            transform: 'translate(-50%, -50%)'
-                        }}
-                        onClick={() => setShowGame(true)}
-                        title="Start Engine?"
-                    />
-
-                    {/* Easter Egg Indicator */}
-                    <img
-                        src="/easter_egg.png"
-                        alt="Easter Egg"
-                        className="absolute z-10 w-60 drop-shadow-md cursor-pointer animate-float hover:scale-110 transition-transform duration-300"
-                        style={{
-                            left: '10%',
-                            top: '46%',
-                            transform: 'translate(-50%, -50%)'
-                        }}
-                        onClick={() => setShowGame(true)}
-                        title="Click me!"
-                    />
-
-                    {/* Interactive Zones */}
-                    {zones.map((zone) => (
-                        <div
-                            key={zone.id}
-                            onClick={() => onNavigate(zone.id)}
-                            className="absolute flex items-center justify-center z-0 cursor-pointer group"
-                            style={{
-                                top: `${zone.y}%`,
-                                left: `${zone.x}%`,
-                                width: '20%',
-                                height: '35%',
-                                transform: 'translate(-50%, -50%)',
-                                backgroundColor: 'transparent'
-                            }}
-                        >
-                            {/* Always visible label */}
-                            {!zone.hidden && (
-                                <div className="bg-black/60 p-1 md:p-2 rounded border border-white/10 backdrop-blur-sm">
-                                    <p className="font-pixel text-xs md:text-sm text-white text-center whitespace-nowrap drop-shadow-md">
-                                        {zone.name}
-                                    </p>
-                                    <p className="font-pixel text-[8px] md:text-[10px] text-yellow-300 text-center mt-1">
-                                        {zone.desc}
-                                    </p>
-                                </div>
-                            )}
-                        </div>
-                    ))}
-
-                    {/* Player Avatar */}
-                    <motion.div
-                        className="absolute z-30 flex flex-col items-center pointer-events-none"
-                        style={{
-                            top: `${position.y}%`,
-                            left: `${position.x}%`,
-                            transform: 'translate(-50%, -50%)'
-                        }}
-                        animate={{
-                            y: isMoving ? [0, -5, 0] : 0,
-                        }}
-                        transition={{
-                            y: { duration: 0.2, repeat: isMoving ? Infinity : 0 }
-                        }}
-                    >
-                        <img
-                            src="/me_rpg.png"
-                            alt="Player"
-                            className={`w-44 h-44 md:w-52 md:h-52 object-contain drop-shadow-2xl transition-transform ${direction === 'left' ? 'scale-x-[-1]' : ''}`}
-                        />
-                    </motion.div>
-                </div>
-            </div>
-
-            {/* UI LAYOUT (Fixed Overlay) */}
-
-            {/* Welcome Message & Instructions */}
-            <div className="absolute top-4 left-0 right-0 text-center z-10 pointer-events-none">
-                <h1 className="font-pixel text-xl md:text-4xl text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] mb-2">
-                    Welcome To My Personal Page, Explore!
-                </h1>
-                <p className="font-pixel text-xs md:text-sm text-yellow-300 animate-pulse drop-shadow-md">
-                    <span className="hidden md:inline">Use Arrow Keys to Move</span>
-                    <span className="md:hidden">Use Controls to Move (Scroll to see full map)</span>
-                </p>
-            </div>
-
-            {/* Instructions Overlay (Desktop) */}
-            {!isMoving && !activeZone && !showGame && (
-                <div className="hidden md:block absolute top-20 left-1/2 transform -translate-x-1/2 text-center z-10 pointer-events-none animate-pulse">
-                    <div className="bg-black/50 p-4 rounded-lg backdrop-blur-sm border border-white/20">
-                        <div className="flex justify-center gap-2 text-white">
                             <ArrowLeft size={16} />
                             <div className="flex flex-col gap-1">
                                 <ArrowUp size={16} />
                                 <ArrowDown size={16} />
                             </div>
                             <ArrowRight size={16} />
-                        </div>
-                    </div>
-                </div>
+                        </div >
+                    </div >
+                </div >
             )}
 
-            {/* Interaction Prompt */}
-            {activeZone && !showGame && (
-                <div className="absolute bottom-32 md:bottom-20 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none">
-                    <div className="bg-black/80 p-4 rounded-lg border-2 border-yellow-500 text-center shadow-lg">
-                        <p className="font-pixel text-sm text-white mb-1">Enter {activeZone.name}?</p>
-                        <div className="flex items-center justify-center gap-2 text-yellow-300 font-pixel text-xs">
-                            <CornerDownLeft size={16} />
-                            <span className="hidden md:inline">Press ENTER</span>
-                            <span className="md:hidden">Tap ACTION</span>
-                        </div>
-                    </div>
+{/* Interaction Prompt */ }
+{
+    activeZone && !showGame && (
+        <div className="absolute bottom-32 md:bottom-20 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none">
+            <div className="bg-black/80 p-4 rounded-lg border-2 border-yellow-500 text-center shadow-lg">
+                <p className="font-pixel text-sm text-white mb-1">Enter {activeZone.name}?</p>
+                <div className="flex items-center justify-center gap-2 text-yellow-300 font-pixel text-xs">
+                    <CornerDownLeft size={16} />
+                    <span className="hidden md:inline">Press ENTER</span>
+                    <span className="md:hidden">Tap ACTION</span>
                 </div>
-            )}
-
-            {/* Tenure Road Game Overlay */}
-            <AnimatePresence>
-                {showGame && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-50"
-                    >
-                        <TenureRoadGame onClose={() => setShowGame(false)} />
-                    </motion.div>
-                )}
-            </AnimatePresence>
-
-            {/* Mobile Controls (D-Pad & Action) */}
-            <div className="md:hidden absolute bottom-8 left-8 z-50">
-                <div className="relative w-32 h-32 bg-black/30 rounded-full backdrop-blur-sm border border-white/10">
-                    {/* Up */}
-                    <button
-                        className="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-10 bg-slate-800/80 rounded-t-lg border border-slate-600 active:bg-blue-600 flex items-center justify-center"
-                        onPointerDown={() => setActiveButton('ArrowUp')}
-                        onPointerUp={() => setActiveButton(null)}
-                        onPointerLeave={() => setActiveButton(null)}
-                    >
-                        <ArrowUp size={20} className="text-white" />
-                    </button>
-                    {/* Down */}
-                    <button
-                        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-10 h-10 bg-slate-800/80 rounded-b-lg border border-slate-600 active:bg-blue-600 flex items-center justify-center"
-                        onPointerDown={() => setActiveButton('ArrowDown')}
-                        onPointerUp={() => setActiveButton(null)}
-                        onPointerLeave={() => setActiveButton(null)}
-                    >
-                        <ArrowDown size={20} className="text-white" />
-                    </button>
-                    {/* Left */}
-                    <button
-                        className="absolute top-1/2 left-0 -translate-y-1/2 w-10 h-10 bg-slate-800/80 rounded-l-lg border border-slate-600 active:bg-blue-600 flex items-center justify-center"
-                        onPointerDown={() => setActiveButton('ArrowLeft')}
-                        onPointerUp={() => setActiveButton(null)}
-                        onPointerLeave={() => setActiveButton(null)}
-                    >
-                        <ArrowLeft size={20} className="text-white" />
-                    </button>
-                    {/* Right */}
-                    <button
-                        className="absolute top-1/2 right-0 -translate-y-1/2 w-10 h-10 bg-slate-800/80 rounded-r-lg border border-slate-600 active:bg-blue-600 flex items-center justify-center"
-                        onPointerDown={() => setActiveButton('ArrowRight')}
-                        onPointerUp={() => setActiveButton(null)}
-                        onPointerLeave={() => setActiveButton(null)}
-                    >
-                        <ArrowRight size={20} className="text-white" />
-                    </button>
-                    {/* Center Decoration */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-slate-700 rounded-full border border-slate-500" />
-                </div>
-            </div>
-
-            {/* Action Button */}
-            <div className="md:hidden absolute bottom-8 right-8 z-50">
-                <button
-                    className={`w-20 h-20 rounded-full border-4 flex items-center justify-center shadow-lg transition-all active:scale-95 ${activeZone ? 'bg-yellow-600 border-yellow-400 animate-pulse' : 'bg-slate-800/80 border-slate-600'}`}
-                    onClick={() => {
-                        if (activeZone) {
-                            if (activeZone.id === 'easter-egg') {
-                                setShowGame(true);
-                            } else {
-                                onNavigate(activeZone.id);
-                            }
-                        }
-                    }}
-                >
-                    <span className="font-pixel text-white text-xs font-bold">
-                        {activeZone ? 'ENTER' : 'ACTION'}
-                    </span>
-                </button>
             </div>
         </div>
+    )
+}
+
+{/* Tenure Road Game Overlay */ }
+<AnimatePresence>
+    {showGame && (
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50"
+        >
+            <TenureRoadGame onClose={() => setShowGame(false)} />
+        </motion.div>
+    )}
+</AnimatePresence>
+
+{/* Mobile Controls (D-Pad & Action) */ }
+<div className="md:hidden absolute bottom-8 left-8 z-50">
+    <div className="relative w-32 h-32 bg-black/30 rounded-full backdrop-blur-sm border border-white/10">
+        {/* Up */}
+        <button
+            className="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-10 bg-slate-800/80 rounded-t-lg border border-slate-600 active:bg-blue-600 flex items-center justify-center"
+            onPointerDown={() => setActiveButton('ArrowUp')}
+            onPointerUp={() => setActiveButton(null)}
+            onPointerLeave={() => setActiveButton(null)}
+        >
+            <ArrowUp size={20} className="text-white" />
+        </button>
+        {/* Down */}
+        <button
+            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-10 h-10 bg-slate-800/80 rounded-b-lg border border-slate-600 active:bg-blue-600 flex items-center justify-center"
+            onPointerDown={() => setActiveButton('ArrowDown')}
+            onPointerUp={() => setActiveButton(null)}
+            onPointerLeave={() => setActiveButton(null)}
+        >
+            <ArrowDown size={20} className="text-white" />
+        </button>
+        {/* Left */}
+        <button
+            className="absolute top-1/2 left-0 -translate-y-1/2 w-10 h-10 bg-slate-800/80 rounded-l-lg border border-slate-600 active:bg-blue-600 flex items-center justify-center"
+            onPointerDown={() => setActiveButton('ArrowLeft')}
+            onPointerUp={() => setActiveButton(null)}
+            onPointerLeave={() => setActiveButton(null)}
+        >
+            <ArrowLeft size={20} className="text-white" />
+        </button>
+        {/* Right */}
+        <button
+            className="absolute top-1/2 right-0 -translate-y-1/2 w-10 h-10 bg-slate-800/80 rounded-r-lg border border-slate-600 active:bg-blue-600 flex items-center justify-center"
+            onPointerDown={() => setActiveButton('ArrowRight')}
+            onPointerUp={() => setActiveButton(null)}
+            onPointerLeave={() => setActiveButton(null)}
+        >
+            <ArrowRight size={20} className="text-white" />
+        </button>
+        {/* Center Decoration */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-slate-700 rounded-full border border-slate-500" />
+    </div>
+</div>
+
+{/* Action Button */ }
+<div className="md:hidden absolute bottom-8 right-8 z-50">
+    <button
+        className={`w-20 h-20 rounded-full border-4 flex items-center justify-center shadow-lg transition-all active:scale-95 ${activeZone ? 'bg-yellow-600 border-yellow-400 animate-pulse' : 'bg-slate-800/80 border-slate-600'}`}
+        onClick={() => {
+            if (activeZone) {
+                if (activeZone.id === 'easter-egg') {
+                    setShowGame(true);
+                } else {
+                    onNavigate(activeZone.id);
+                }
+            }
+        }}
+    >
+        <span className="font-pixel text-white text-xs font-bold">
+            {activeZone ? 'ENTER' : 'ACTION'}
+        </span>
+    </button>
+</div>
+        </div >
     );
 };
 
