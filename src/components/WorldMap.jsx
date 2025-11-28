@@ -20,11 +20,11 @@ const WorldMap = ({ onNavigate }) => {
 
     // Zones mapped to user's 'world_map_clean.png'
     const zones = [
-        { id: 'about', name: 'The Tavern', desc: '(About Me)', x: 39, y: 42, radius: 10 },
-        { id: 'research', name: 'Alchemist Lab', desc: '(Research)', x: 70, y: 22, radius: 10 },
-        { id: 'publications', name: 'The Library', desc: '(Publications)', x: 29, y: 63, radius: 10 },
-        { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 28, y: 15, radius: 10 },
-        { id: 'teaching', name: 'The Academy', desc: '(Teaching)', x: 73, y: 65, radius: 10 },
+        { id: 'about', name: 'The Tavern', desc: '(About Me)', x: 45.5, y: 42, radius: 10 },
+        { id: 'research', name: 'Alchemist Lab', desc: '(Research)', x: 63, y: 22, radius: 10 },
+        { id: 'publications', name: 'The Library', desc: '(Publications)', x: 36, y: 63, radius: 10 },
+        { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 34.5, y: 15, radius: 10 },
+        { id: 'teaching', name: 'The Academy', desc: '(Teaching)', x: 66.5, y: 65, radius: 10 },
         { id: 'classic-mode', name: 'Classical View', desc: '(Exit RPG Mode)', x: 94, y: 20, radius: 20 },
         { id: 'easter-egg', name: 'Easter Egg', desc: '(Tenure Road)', x: 10, y: 36, radius: 10, hidden: true },
     ];
@@ -151,9 +151,10 @@ const WorldMap = ({ onNavigate }) => {
                 <div className="relative h-full aspect-video min-w-[177.78vh] md:min-w-0 md:w-full md:h-auto md:aspect-video shadow-2xl">
                     {/* Map Background */}
                     <div
-                        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                        className="absolute inset-0 bg-center bg-no-repeat"
                         style={{
                             backgroundImage: "url('/world_map169.png')",
+                            backgroundSize: '100% 100%',
                             imageRendering: 'pixelated'
                         }}
                     />
@@ -165,7 +166,7 @@ const WorldMap = ({ onNavigate }) => {
                         className="absolute z-10 w-40 drop-shadow-lg cursor-pointer hover:scale-110 transition-transform duration-300"
                         style={{
                             left: '10%',
-                            top: '50%',
+                            top: '38%',
                             transform: 'translate(-50%, -50%)'
                         }}
                         onClick={() => setShowGame(true)}
@@ -179,7 +180,7 @@ const WorldMap = ({ onNavigate }) => {
                         className="absolute z-10 w-60 drop-shadow-md cursor-pointer animate-float hover:scale-110 transition-transform duration-300"
                         style={{
                             left: '10%',
-                            top: '46%',
+                            top: '34%',
                             transform: 'translate(-50%, -50%)'
                         }}
                         onClick={() => setShowGame(true)}
