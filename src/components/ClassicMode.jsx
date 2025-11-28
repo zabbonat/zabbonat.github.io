@@ -38,13 +38,13 @@ const ClassicMode = ({ onSwitchToRPG }) => {
                                     <p className={theme.textMuted}>University of Turin</p>
                                 </div>
                                 <p className={`text-lg ${isDarkMode ? 'text-slate-300' : 'text-slate-700'} leading-relaxed`}>
-                                    I am a Postdoctoral Researcher at the Department of Culture, Politics and Society, University of Turin.
+                                    I am a Postdoctoral Researcher at the Department of Culture, Politics and Society, University of Turin, working under the supervision of Prof. Aldo Geuna.
                                 </p>
                                 <p className={`text-lg ${isDarkMode ? 'text-slate-300' : 'text-slate-700'} leading-relaxed`}>
-                                    My research focuses on "Science technology relationships in the development of AI in the health sector", under the guidance of Prof. Aldo Geuna.
+                                    My research focuses on science-technology relationships in the development of AI in the healthcare sector.
                                 </p>
                                 <p className={`text-lg ${isDarkMode ? 'text-slate-300' : 'text-slate-700'} leading-relaxed`}>
-                                    My skills lie in Innovation, Industrial Dynamics, and Econometrics. I apply Machine Learning and NLP techniques to investigate diverse realms: Scientometrics, Labor Markets, and Social Phenomena.
+                                    My expertise spans Innovation Economics, Industrial Dynamics, and Econometrics. I apply Machine Learning and NLP techniques to investigate diverse domains, including Scientometrics, Labor Markets, and Social Phenomena.
                                 </p>
 
                                 <div className="flex gap-4 pt-2">
