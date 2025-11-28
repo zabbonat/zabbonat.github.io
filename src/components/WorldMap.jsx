@@ -140,7 +140,6 @@ const WorldMap = ({ onNavigate }) => {
     }, [position]);
 
     return (
-    return (
         <div className="relative w-full h-screen bg-black overflow-hidden flex items-center justify-center select-none touch-none">
             {/* Map Background */}
             <div
