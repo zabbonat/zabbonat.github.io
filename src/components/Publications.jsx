@@ -34,7 +34,7 @@ const Publications = () => {
                                 <p className="text-xs text-slate-400 mb-2">Abbonato, D., Bianchini, S., Gargiulo, F., & Venturini, T. (2024)</p>
                                 <div className="flex justify-between items-center mt-2">
                                     <span className="inline-block px-2 py-1 bg-blue-900/50 text-blue-300 text-[10px] rounded border border-blue-800">Quantitative Science Studies</span>
-                                    <a href="https://doi.org/10.1162/qss_a_00288" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-white transition-colors">
+                                    <a href="https://direct.mit.edu/qss/article/5/4/922/124451" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-white transition-colors">
                                         <ExternalLink size={14} />
                                     </a>
                                 </div>
