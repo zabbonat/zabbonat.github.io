@@ -12,6 +12,8 @@ import Contact from './components/Contact';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 
+import ClassicMode from './components/ClassicMode';
+
 function App() {
   const [currentView, setCurrentView] = useState('map');
   const [isClassicMode, setIsClassicMode] = useState(false);
@@ -28,31 +30,7 @@ function App() {
   };
 
   if (isClassicMode) {
-    return (
-      <div className="bg-primary min-h-screen text-white font-sans">
-        <Navbar />
-        <Hero />
-        <About />
-        <Research />
-        <Publications />
-        <Teaching />
-        <CV />
-        <Contact />
-
-        {/* Switch back to RPG Mode */}
-        <motion.button
-          onClick={() => setIsClassicMode(false)}
-          className="fixed bottom-8 right-8 p-4 bg-purple-600 rounded-full shadow-lg z-50 hover:bg-purple-500 transition-colors border-2 border-white"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-        >
-          <span className="font-pixel text-xs text-white">RPG Mode</span>
-        </motion.button>
-        <footer className="py-8 text-center text-slate-500 text-sm bg-slate-900 border-t border-slate-800">
-          <p>© {new Date().getFullYear()} Diletta Abbonato. All rights reserved.</p>
-        </footer>
-      </div>
-    );
+    return <ClassicMode onSwitchToRPG={() => setIsClassicMode(false)} />;
   }
 
   const hp = currentView === 'publications' ? 50 : 100;
