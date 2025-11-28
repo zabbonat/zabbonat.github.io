@@ -284,15 +284,21 @@ const ClassicMode = ({ onSwitchToRPG }) => {
                         Diletta Abbonato
                     </h1>
 
-                    <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
-                        {['Home', 'Research', 'Publications', 'Teaching', 'CV'].map((item) => (
+                    <nav className="hidden md:flex items-center gap-8 text-lg font-medium text-slate-600">
+                        {[
+                            { id: 'home', label: 'Home' },
+                            { id: 'research', label: 'Research Tools' },
+                            { id: 'publications', label: 'Publications' },
+                            { id: 'teaching', label: 'Teaching' },
+                            { id: 'cv', label: 'CV' }
+                        ].map((item) => (
                             <button
-                                key={item}
-                                onClick={() => setActiveTab(item.toLowerCase())}
-                                className={`hover:text-blue-600 transition-colors relative py-2 ${activeTab === item.toLowerCase() ? 'text-blue-600' : ''}`}
+                                key={item.id}
+                                onClick={() => setActiveTab(item.id)}
+                                className={`hover:text-blue-600 transition-colors relative py-2 ${activeTab === item.id ? 'text-blue-600' : ''}`}
                             >
-                                {item}
-                                {activeTab === item.toLowerCase() && (
+                                {item.label}
+                                {activeTab === item.id && (
                                     <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 rounded-full" />
                                 )}
                             </button>
