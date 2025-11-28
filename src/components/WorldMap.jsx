@@ -16,10 +16,9 @@ const WorldMap = ({ onNavigate }) => {
 
     const dialogLines = [
         "Welcome to my personal page, explore!",
-        "You can move using the arrow keys, click on buildings, or access the Classical CV here.",
+        "You can move using the arrow keys, click on buildings, or access the Classical CV by clicking 'Classical View' or the wheel icon.",
         "Try to discover the Easter Egg!",
-        "P.S. There is also another way to explore the map...",
-        "You can also access the Classical CV by clicking 'Classical View' or the wheel icon."
+        "P.S. There is also another way to explore the map..."
     ];
 
     // Motorcycle State
