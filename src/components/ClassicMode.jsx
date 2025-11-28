@@ -105,7 +105,7 @@ const ClassicMode = ({ onSwitchToRPG }) => {
                                         <br />
                                         <span className={`text-base ${theme.textMuted}`}>Abbonato, D., Bianchini, S., Gargiulo, F., & Venturini, T. (2024) - Quantitative Science Studies</span>
                                         <br />
-                                        <a href="https://doi.org/10.1162/qss_a_00288" target="_blank" rel="noopener noreferrer" className={`text-base ${theme.accent} hover:underline`}>Read Paper</a>
+                                        <a href="https://direct.mit.edu/qss/article/5/4/922/124451" target="_blank" rel="noopener noreferrer" className={`text-base ${theme.accent} hover:underline`}>Read Paper</a>
                                     </li>
                                 </ul>
                             </div>
