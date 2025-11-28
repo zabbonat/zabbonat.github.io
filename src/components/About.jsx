@@ -68,7 +68,7 @@ const About = () => {
                         <div className="bg-yellow-900/20 p-6 rounded border border-yellow-700/50 mb-6">
                             <h3 className="font-pixel text-xl text-yellow-500 mb-4">Quest Log</h3>
                             <p className="text-slate-300 mb-4 leading-relaxed">
-                                Greetings, traveler! I am currently a <strong>Postdoctoral Researcher</strong> at the Department of Culture, Politics and Society, <strong>University of Turin</strong>.
+                                Greetings, traveler! I am currently a Postdoctoral Researcher at the Department of Culture, Politics and Society, University of Turin.
                             </p>
                             <p className="text-slate-300 mb-4 leading-relaxed">
                                 My current quest involves "Science technology relationships in the development of AI in the health sector", under the guidance of Prof. Aldo Geuna.

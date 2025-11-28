@@ -19,13 +19,13 @@ const ClassicMode = ({ onSwitchToRPG }) => {
                                     <p className="text-lg text-slate-600">Postdoctoral Researcher</p>
                                     <p className="text-slate-500">University of Turin</p>
                                 </div>
-                                <p className="text-slate-700 leading-relaxed">
+                                <p className="text-lg text-slate-700 leading-relaxed">
                                     I am a Postdoctoral Researcher at the Department of Culture, Politics and Society, University of Turin.
                                 </p>
-                                <p className="text-slate-700 leading-relaxed">
+                                <p className="text-lg text-slate-700 leading-relaxed">
                                     My research focuses on "Science technology relationships in the development of AI in the health sector", under the guidance of Prof. Aldo Geuna.
                                 </p>
-                                <p className="text-slate-700 leading-relaxed">
+                                <p className="text-lg text-slate-700 leading-relaxed">
                                     My skills lie in Innovation, Industrial Dynamics, and Econometrics. I apply Machine Learning and NLP techniques to investigate diverse realms: Scientometrics, Labor Markets, and Social Phenomena.
                                 </p>
 
@@ -284,7 +284,7 @@ const ClassicMode = ({ onSwitchToRPG }) => {
                         Diletta Abbonato
                     </h1>
 
-                    <nav className="hidden md:flex items-center gap-8 text-lg font-medium text-slate-600">
+                    <nav className="hidden md:flex items-center gap-8 text-xl font-medium text-slate-600">
                         {[
                             { id: 'home', label: 'Home' },
                             { id: 'research', label: 'Research Tools' },
