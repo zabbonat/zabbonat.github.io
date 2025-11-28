@@ -162,7 +162,7 @@ const WorldMap = ({ onNavigate }) => {
                         className="absolute z-10 w-40 drop-shadow-lg cursor-pointer hover:scale-110 transition-transform duration-300"
                         style={{
                             left: '10%',
-                            top: '38%',
+                            top: '50%',
                             transform: 'translate(-50%, -50%)'
                         }}
                         onClick={() => setShowGame(true)}
@@ -176,7 +176,7 @@ const WorldMap = ({ onNavigate }) => {
                         className="absolute z-10 w-60 drop-shadow-md cursor-pointer animate-float hover:scale-110 transition-transform duration-300"
                         style={{
                             left: '10%',
-                            top: '34%',
+                            top: '46%',
                             transform: 'translate(-50%, -50%)'
                         }}
                         onClick={() => setShowGame(true)}
