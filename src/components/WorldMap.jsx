@@ -28,11 +28,11 @@ const WorldMap = ({ onNavigate }) => {
 
     // Zones mapped to user's 'world_map_clean.png'
     const zones = [
-        { id: 'about', name: 'The Tavern', desc: '(About Me)', x: 42.5, y: 42, radius: 6 }, // Moved left
+        { id: 'about', name: 'The Tavern', desc: '(About Me)', x: 45.5, y: 42, radius: 6, interactionOffset: { x: -3, y: 0 } },
         { id: 'research', name: 'Alchemist Lab', desc: '(Research)', x: 63, y: 22, radius: 6 },
-        { id: 'publications', name: 'The Library', desc: '(Publications)', x: 33, y: 63, radius: 6 }, // Moved left
-        { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 31.5, y: 15, radius: 6 }, // Moved left
-        { id: 'teaching', name: 'The Academy', desc: '(Teaching)', x: 63.5, y: 65, radius: 6 }, // Moved left
+        { id: 'publications', name: 'The Library', desc: '(Publications)', x: 36, y: 63, radius: 6, interactionOffset: { x: -3, y: 0 } },
+        { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 34.5, y: 15, radius: 6, interactionOffset: { x: -3, y: 0 } },
+        { id: 'teaching', name: 'The Academy', desc: '(Teaching)', x: 66.5, y: 65, radius: 6, interactionOffset: { x: -3, y: 0 } },
         { id: 'classic-mode', name: 'Classical View', desc: '(Exit RPG Mode)', x: 94, y: 20, radius: 12 },
         { id: 'easter-egg', name: 'Easter Egg', desc: '(Tenure Road)', x: 10, y: 36, radius: 6, hidden: true },
     ];
@@ -170,8 +170,12 @@ const WorldMap = ({ onNavigate }) => {
     useEffect(() => {
         let foundZone = null;
         zones.forEach((zone) => {
-            const dx = position.x - zone.x;
-            const dy = position.y - zone.y;
+            // Use interaction offset if available, otherwise use visual position
+            const targetX = zone.interactionOffset ? zone.x + zone.interactionOffset.x : zone.x;
+            const targetY = zone.interactionOffset ? zone.y + zone.interactionOffset.y : zone.y;
+
+            const dx = position.x - targetX;
+            const dy = position.y - targetY;
             const distance = Math.sqrt(dx * dx + dy * dy);
 
             if (distance < zone.radius) {
