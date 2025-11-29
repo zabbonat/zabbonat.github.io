@@ -28,7 +28,7 @@ const WorldMap = ({ onNavigate }) => {
 
     // Zones mapped to user's 'world_map_clean.png'
     const zones = [
-        { id: 'about', name: 'The Tavern', desc: '(About Me)', x: 45.5, y: 42, radius: 6, interactionOffset: { x: -3, y: 0 } },
+        { id: 'about', name: 'The Tavern', desc: '(About Me)', x: 45.5, y: 42, radius: 5, interactionOffset: { x: -4, y: -2 } },
         { id: 'research', name: 'Alchemist Lab', desc: '(Research)', x: 63, y: 22, radius: 6 },
         { id: 'publications', name: 'The Library', desc: '(Publications)', x: 36, y: 63, radius: 6, interactionOffset: { x: -3, y: 0 } },
         { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 34.5, y: 15, radius: 6, interactionOffset: { x: -3, y: 0 } },
