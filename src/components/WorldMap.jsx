@@ -137,8 +137,10 @@ const WorldMap = ({ onNavigate }) => {
                 if (nearBike || isRiding) {
                     if (isRiding) {
                         // Dismount
+                        console.log('Dismounting. Player Position:', position);
                         setIsRiding(false);
                         setBikePosition({ x: position.x, y: position.y });
+                        console.log('Set Bike Position to:', { x: position.x, y: position.y });
                     } else if (nearBike) {
                         // Mount
                         setIsRiding(true);
