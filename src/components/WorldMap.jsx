@@ -279,7 +279,7 @@ const WorldMap = ({ onNavigate }) => {
             {/* Scrollable Map Area */}
             <div
                 ref={mapContainerRef}
-                className="w-full h-full overflow-auto md:overflow-hidden flex items-center justify-center"
+                className="w-full h-full overflow-auto md:overflow-hidden flex md:items-center md:justify-center"
             >
                 {/* Map Wrapper - Enforces Aspect Ratio & Full Height */}
                 <div
