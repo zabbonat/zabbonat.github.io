@@ -207,6 +207,7 @@ const WorldMap = ({ onNavigate }) => {
     }, [position, isRiding, bikePosition]);
 
     const mapContainerRef = useRef(null);
+    const mapContentRef = useRef(null);
 
     // Camera Follow for Mobile
     useEffect(() => {
@@ -236,11 +237,25 @@ const WorldMap = ({ onNavigate }) => {
             });
         };
 
+        // Initial center
         centerCamera();
 
-        // Add resize listener to handle orientation changes
+        // Observer for map content size changes (ensures correct positioning after load)
+        const resizeObserver = new ResizeObserver(() => {
+            centerCamera();
+        });
+
+        if (mapContentRef.current) {
+            resizeObserver.observe(mapContentRef.current);
+        }
+
+        // Window resize listener
         window.addEventListener('resize', centerCamera);
-        return () => window.removeEventListener('resize', centerCamera);
+
+        return () => {
+            window.removeEventListener('resize', centerCamera);
+            resizeObserver.disconnect();
+        };
 
     }, [position]);
 
@@ -253,7 +268,10 @@ const WorldMap = ({ onNavigate }) => {
                 className="w-full h-full overflow-auto md:overflow-hidden flex items-center justify-center"
             >
                 {/* Map Wrapper - Enforces Aspect Ratio & Full Height */}
-                <div className="relative h-full aspect-video min-w-[177.78vh] md:min-w-0 md:w-full md:h-auto md:aspect-video shadow-2xl">
+                <div
+                    ref={mapContentRef}
+                    className="relative h-full aspect-video min-w-[177.78vh] md:min-w-0 md:w-full md:h-auto md:aspect-video shadow-2xl"
+                >
                     {/* Map Background */}
                     <div
                         className="absolute inset-0 bg-center bg-no-repeat"
@@ -383,48 +401,54 @@ const WorldMap = ({ onNavigate }) => {
             {/* UI LAYOUT (Fixed Overlay) */}
 
             {/* Instructions Overlay (Desktop) */}
-            {!isMoving && !activeZone && !showGame && !showDialog && (
-                <div className="hidden md:block absolute top-20 left-1/2 transform -translate-x-1/2 text-center z-10 pointer-events-none animate-pulse">
-                    <div className="bg-black/50 p-4 rounded-lg backdrop-blur-sm border border-white/20">
-                        <div className="flex justify-center gap-2 text-white">
-                            <ArrowLeft size={16} />
-                            <div className="flex flex-col gap-1">
-                                <ArrowUp size={16} />
-                                <ArrowDown size={16} />
+            {
+                !isMoving && !activeZone && !showGame && !showDialog && (
+                    <div className="hidden md:block absolute top-20 left-1/2 transform -translate-x-1/2 text-center z-10 pointer-events-none animate-pulse">
+                        <div className="bg-black/50 p-4 rounded-lg backdrop-blur-sm border border-white/20">
+                            <div className="flex justify-center gap-2 text-white">
+                                <ArrowLeft size={16} />
+                                <div className="flex flex-col gap-1">
+                                    <ArrowUp size={16} />
+                                    <ArrowDown size={16} />
+                                </div>
+                                <ArrowRight size={16} />
                             </div>
-                            <ArrowRight size={16} />
                         </div>
                     </div>
-                </div>
-            )}
+                )
+            }
 
             {/* Interaction Prompt */}
-            {activeZone && !showGame && !nearBike && !isRiding && !showDialog && (
-                <div className="absolute bottom-32 md:bottom-20 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none">
-                    <div className="bg-black/80 p-4 rounded-lg border-2 border-yellow-500 text-center shadow-lg">
-                        <p className="font-pixel text-sm text-white mb-1">Enter {activeZone.name}?</p>
-                        <div className="flex items-center justify-center gap-2 text-yellow-300 font-pixel text-xs">
-                            <CornerDownLeft size={16} />
-                            <span className="hidden md:inline">Press ENTER</span>
-                            <span className="md:hidden">Tap ACTION</span>
+            {
+                activeZone && !showGame && !nearBike && !isRiding && !showDialog && (
+                    <div className="absolute bottom-32 md:bottom-20 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none">
+                        <div className="bg-black/80 p-4 rounded-lg border-2 border-yellow-500 text-center shadow-lg">
+                            <p className="font-pixel text-sm text-white mb-1">Enter {activeZone.name}?</p>
+                            <div className="flex items-center justify-center gap-2 text-yellow-300 font-pixel text-xs">
+                                <CornerDownLeft size={16} />
+                                <span className="hidden md:inline">Press ENTER</span>
+                                <span className="md:hidden">Tap ACTION</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}
+                )
+            }
 
             {/* Bike Interaction Prompt */}
-            {(nearBike || isRiding) && !showGame && !showDialog && (
-                <div className="absolute bottom-32 md:bottom-20 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none">
-                    <div className="bg-black/80 p-4 rounded-lg border-2 border-blue-500 text-center shadow-lg">
-                        <p className="font-pixel text-sm text-white mb-1">{isRiding ? "Dismount Bike?" : "Ride Bike?"}</p>
-                        <div className="flex items-center justify-center gap-2 text-blue-300 font-pixel text-xs">
-                            <CornerDownLeft size={16} />
-                            <span className="hidden md:inline">Press ENTER</span>
-                            <span className="md:hidden">Tap ACTION</span>
+            {
+                (nearBike || isRiding) && !showGame && !showDialog && (
+                    <div className="absolute bottom-32 md:bottom-20 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none">
+                        <div className="bg-black/80 p-4 rounded-lg border-2 border-blue-500 text-center shadow-lg">
+                            <p className="font-pixel text-sm text-white mb-1">{isRiding ? "Dismount Bike?" : "Ride Bike?"}</p>
+                            <div className="flex items-center justify-center gap-2 text-blue-300 font-pixel text-xs">
+                                <CornerDownLeft size={16} />
+                                <span className="hidden md:inline">Press ENTER</span>
+                                <span className="md:hidden">Tap ACTION</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}
+                )
+            }
 
             {/* Tenure Road Game Overlay */}
             <AnimatePresence>
@@ -507,7 +531,7 @@ const WorldMap = ({ onNavigate }) => {
                     </span>
                 </button>
             </div>
-        </div>
+        </div >
     );
 };
 
