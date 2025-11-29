@@ -206,11 +206,52 @@ const WorldMap = ({ onNavigate }) => {
 
     }, [position, isRiding, bikePosition]);
 
+    const mapContainerRef = useRef(null);
+
+    // Camera Follow for Mobile
+    useEffect(() => {
+        const centerCamera = () => {
+            // Only active on mobile (check width < 768px matches 'md' breakpoint)
+            if (window.innerWidth >= 768) return;
+
+            const container = mapContainerRef.current;
+            if (!container) return;
+
+            // Calculate pixel position of player
+            // position.x is percentage (0-100)
+            const mapWidth = container.scrollWidth;
+            const mapHeight = container.scrollHeight;
+
+            const playerX = (position.x / 100) * mapWidth;
+            const playerY = (position.y / 100) * mapHeight;
+
+            // Calculate scroll position to center player
+            const scrollLeft = playerX - container.clientWidth / 2;
+            const scrollTop = playerY - container.clientHeight / 2;
+
+            container.scrollTo({
+                left: scrollLeft,
+                top: scrollTop,
+                behavior: 'auto' // Instant follow to prevent lag
+            });
+        };
+
+        centerCamera();
+
+        // Add resize listener to handle orientation changes
+        window.addEventListener('resize', centerCamera);
+        return () => window.removeEventListener('resize', centerCamera);
+
+    }, [position]);
+
     return (
         <div className="relative w-full h-screen bg-black overflow-hidden">
 
             {/* Scrollable Map Area */}
-            <div className="w-full h-full overflow-auto md:overflow-hidden flex items-center justify-center">
+            <div
+                ref={mapContainerRef}
+                className="w-full h-full overflow-auto md:overflow-hidden flex items-center justify-center"
+            >
                 {/* Map Wrapper - Enforces Aspect Ratio & Full Height */}
                 <div className="relative h-full aspect-video min-w-[177.78vh] md:min-w-0 md:w-full md:h-auto md:aspect-video shadow-2xl">
                     {/* Map Background */}
