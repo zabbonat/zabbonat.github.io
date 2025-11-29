@@ -10,6 +10,14 @@ const WorldMap = ({ onNavigate }) => {
     const [activeZone, setActiveZone] = useState(null);
     const [showGame, setShowGame] = useState(false);
 
+    // Ref for position to access in event handlers
+    const positionRef = React.useRef(position);
+    useEffect(() => {
+        positionRef.current = position;
+    }, [position]);
+
+    console.log("WorldMap rendering, position:", position);
+
     // Dialog State
     const [showDialog, setShowDialog] = useState(() => !sessionStorage.getItem('hasSeenWelcome'));
     const [dialogStep, setDialogStep] = useState(0);
