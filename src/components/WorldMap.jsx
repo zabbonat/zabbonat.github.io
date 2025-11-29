@@ -72,6 +72,8 @@ const WorldMap = ({ onNavigate }) => {
                 default:
                     return prev;
             }
+            // Update ref immediately to ensure sync for rapid interactions
+            positionRef.current = { x: newX, y: newY };
             return { x: newX, y: newY };
         });
     };
