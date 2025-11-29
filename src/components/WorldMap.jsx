@@ -4,7 +4,7 @@ import { ArrowUp, ArrowDown, ArrowLeft, ArrowRight, CornerDownLeft } from 'lucid
 import TenureRoadGame from './TenureRoadGame';
 
 const WorldMap = ({ onNavigate }) => {
-    const [position, setPosition] = useState({ x: 50, y: 50 });
+    const [position, setPosition] = useState({ x: 12, y: 55 });
     const [direction, setDirection] = useState('down');
     const [isMoving, setIsMoving] = useState(false);
     const [activeZone, setActiveZone] = useState(null);
