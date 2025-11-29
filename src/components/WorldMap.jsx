@@ -28,11 +28,11 @@ const WorldMap = ({ onNavigate }) => {
 
     // Zones mapped to user's 'world_map_clean.png'
     const zones = [
-        { id: 'about', name: 'The Tavern', desc: '(About Me)', x: 45.5, y: 42, radius: 6 },
+        { id: 'about', name: 'The Tavern', desc: '(About Me)', x: 42.5, y: 42, radius: 6 }, // Moved left
         { id: 'research', name: 'Alchemist Lab', desc: '(Research)', x: 63, y: 22, radius: 6 },
-        { id: 'publications', name: 'The Library', desc: '(Publications)', x: 36, y: 63, radius: 6 },
-        { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 34.5, y: 15, radius: 6 },
-        { id: 'teaching', name: 'The Academy', desc: '(Teaching)', x: 66.5, y: 65, radius: 6 },
+        { id: 'publications', name: 'The Library', desc: '(Publications)', x: 33, y: 63, radius: 6 }, // Moved left
+        { id: 'cv', name: 'Archives', desc: '(CV & Resume)', x: 31.5, y: 15, radius: 6 }, // Moved left
+        { id: 'teaching', name: 'The Academy', desc: '(Teaching)', x: 63.5, y: 65, radius: 6 }, // Moved left
         { id: 'classic-mode', name: 'Classical View', desc: '(Exit RPG Mode)', x: 94, y: 20, radius: 12 },
         { id: 'easter-egg', name: 'Easter Egg', desc: '(Tenure Road)', x: 10, y: 36, radius: 6, hidden: true },
     ];
@@ -182,8 +182,12 @@ const WorldMap = ({ onNavigate }) => {
 
         // Check bike proximity
         if (!isRiding) {
-            const dx = position.x - bikePosition.x;
-            const dy = position.y - bikePosition.y;
+            // Interaction offset: Left and Up relative to visual bike
+            const interactionX = bikePosition.x - 2;
+            const interactionY = bikePosition.y - 4;
+
+            const dx = position.x - interactionX;
+            const dy = position.y - interactionY;
             const distance = Math.sqrt(dx * dx + dy * dy);
             // Radius for bike interaction - Tightened to 6
             setNearBike(distance < 6);
