@@ -135,7 +135,14 @@ const WorldMap = ({ onNavigate }) => {
 
                 // Prioritize Bike Interaction
                 if (nearBike || isRiding) {
-                    toggleBike();
+                    if (isRiding) {
+                        // Dismount
+                        setIsRiding(false);
+                        setBikePosition({ x: position.x, y: position.y });
+                    } else if (nearBike) {
+                        // Mount
+                        setIsRiding(true);
+                    }
                 } else if (activeZone) {
                     if (activeZone.id === 'easter-egg') {
                         setShowGame(true);
