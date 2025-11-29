@@ -17,7 +17,7 @@ const WorldMap = ({ onNavigate }) => {
     }, [position]);
 
     // Dialog State
-    const [showDialog, setShowDialog] = useState(() => !sessionStorage.getItem('hasSeenWelcome_v3'));
+    const [showDialog, setShowDialog] = useState(() => !sessionStorage.getItem('hasSeenWelcome_v4'));
     const [dialogStep, setDialogStep] = useState(0);
 
     const dialogLines = [
@@ -122,7 +122,7 @@ const WorldMap = ({ onNavigate }) => {
             setDialogStep(prev => prev + 1);
         } else {
             setShowDialog(false);
-            sessionStorage.setItem('hasSeenWelcome_v3', 'true');
+            sessionStorage.setItem('hasSeenWelcome_v4', 'true');
         }
     };
 
