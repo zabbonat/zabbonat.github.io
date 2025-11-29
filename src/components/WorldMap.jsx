@@ -11,7 +11,7 @@ const WorldMap = ({ onNavigate }) => {
     const [showGame, setShowGame] = useState(false);
 
     // Dialog State
-    const [showDialog, setShowDialog] = useState(true);
+    const [showDialog, setShowDialog] = useState(() => !sessionStorage.getItem('hasSeenWelcome'));
     const [dialogStep, setDialogStep] = useState(0);
 
     const dialogLines = [
@@ -23,7 +23,7 @@ const WorldMap = ({ onNavigate }) => {
 
     // Motorcycle State
     const [isRiding, setIsRiding] = useState(false);
-    const [bikePosition, setBikePosition] = useState({ x: 10, y: 38 }); // Initial position matching original img style
+    const [bikePosition, setBikePosition] = useState({ x: 12, y: 55 }); // Moved lower near trees
     const [nearBike, setNearBike] = useState(false);
 
     // Zones mapped to user's 'world_map_clean.png'
@@ -116,6 +116,7 @@ const WorldMap = ({ onNavigate }) => {
             setDialogStep(prev => prev + 1);
         } else {
             setShowDialog(false);
+            sessionStorage.setItem('hasSeenWelcome', 'true');
         }
     };
 
@@ -298,7 +299,11 @@ const WorldMap = ({ onNavigate }) => {
                                     initial={{ opacity: 0, scale: 0.8, y: 10 }}
                                     animate={{ opacity: 1, scale: 1, y: 0 }}
                                     exit={{ opacity: 0, scale: 0.8, y: 10 }}
-                                    className="absolute right-full top-0 mr-4 w-64 bg-white border-4 border-black p-4 rounded-lg shadow-xl z-50 pointer-events-auto"
+                                    className="absolute right-full top-0 mr-4 w-64 bg-white border-4 border-black p-4 rounded-lg shadow-xl z-50 pointer-events-auto cursor-pointer"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        advanceDialog();
+                                    }}
                                 >
                                     <div className="font-pixel text-xs md:text-sm text-black leading-relaxed">
                                         {dialogLines[dialogStep]}
