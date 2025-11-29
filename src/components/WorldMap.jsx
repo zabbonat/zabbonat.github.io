@@ -240,6 +240,10 @@ const WorldMap = ({ onNavigate }) => {
         // Initial center
         centerCamera();
 
+        // Retry centering after a short delay to ensure layout is stable
+        const timer1 = setTimeout(centerCamera, 100);
+        const timer2 = setTimeout(centerCamera, 500);
+
         // Observer for map content size changes (ensures correct positioning after load)
         const resizeObserver = new ResizeObserver(() => {
             centerCamera();
@@ -255,6 +259,8 @@ const WorldMap = ({ onNavigate }) => {
         return () => {
             window.removeEventListener('resize', centerCamera);
             resizeObserver.disconnect();
+            clearTimeout(timer1);
+            clearTimeout(timer2);
         };
 
     }, [position]);
@@ -315,33 +321,35 @@ const WorldMap = ({ onNavigate }) => {
                     />
 
                     {/* Interactive Zones */}
-                    {zones.map((zone) => (
-                        <div
-                            key={zone.id}
-                            onClick={() => onNavigate(zone.id)}
-                            className="absolute flex items-center justify-center z-0 cursor-pointer group"
-                            style={{
-                                top: `${zone.y}%`,
-                                left: `${zone.x}%`,
-                                width: '20%',
-                                height: '35%',
-                                transform: 'translate(-50%, -50%)',
-                                backgroundColor: 'transparent'
-                            }}
-                        >
-                            {/* Always visible label */}
-                            {!zone.hidden && (
-                                <div className="bg-black/60 p-1 md:p-2 rounded border border-white/10 backdrop-blur-sm">
-                                    <p className="font-pixel text-xs md:text-sm text-white text-center whitespace-nowrap drop-shadow-md">
-                                        {zone.name}
-                                    </p>
-                                    <p className="font-pixel text-[8px] md:text-[10px] text-yellow-300 text-center mt-1">
-                                        {zone.desc}
-                                    </p>
-                                </div>
-                            )}
-                        </div>
-                    ))}
+                    {
+                        zones.map((zone) => (
+                            <div
+                                key={zone.id}
+                                onClick={() => onNavigate(zone.id)}
+                                className="absolute flex items-center justify-center z-0 cursor-pointer group"
+                                style={{
+                                    top: `${zone.y}%`,
+                                    left: `${zone.x}%`,
+                                    width: '20%',
+                                    height: '35%',
+                                    transform: 'translate(-50%, -50%)',
+                                    backgroundColor: 'transparent'
+                                }}
+                            >
+                                {/* Always visible label */}
+                                {!zone.hidden && (
+                                    <div className="bg-black/60 p-1 md:p-2 rounded border border-white/10 backdrop-blur-sm">
+                                        <p className="font-pixel text-xs md:text-sm text-white text-center whitespace-nowrap drop-shadow-md">
+                                            {zone.name}
+                                        </p>
+                                        <p className="font-pixel text-[8px] md:text-[10px] text-yellow-300 text-center mt-1">
+                                            {zone.desc}
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
+                        ))
+                    }
 
                     {/* Player Avatar */}
                     <motion.div
@@ -395,8 +403,8 @@ const WorldMap = ({ onNavigate }) => {
                             )}
                         </AnimatePresence>
                     </motion.div>
-                </div>
-            </div>
+                </div >
+            </div >
 
             {/* UI LAYOUT (Fixed Overlay) */}
 
