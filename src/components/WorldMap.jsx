@@ -102,7 +102,7 @@ const WorldMap = ({ onNavigate }) => {
         if (isRiding) {
             // Dismount
             setIsRiding(false);
-            setBikePosition({ x: position.x, y: position.y });
+            setBikePosition({ x: positionRef.current.x, y: positionRef.current.y });
         } else if (nearBike) {
             // Mount
             setIsRiding(true);
@@ -135,10 +135,8 @@ const WorldMap = ({ onNavigate }) => {
                 if (nearBike || isRiding) {
                     if (isRiding) {
                         // Dismount
-                        console.log('Dismounting. Player Position:', position);
                         setIsRiding(false);
-                        setBikePosition({ x: position.x, y: position.y });
-                        console.log('Set Bike Position to:', { x: position.x, y: position.y });
+                        setBikePosition({ x: positionRef.current.x, y: positionRef.current.y });
                     } else if (nearBike) {
                         // Mount
                         setIsRiding(true);
@@ -171,7 +169,7 @@ const WorldMap = ({ onNavigate }) => {
             window.removeEventListener('keydown', handleKeyDown);
             window.removeEventListener('keyup', handleKeyUp);
         };
-    }, [activeZone, onNavigate, showGame, nearBike, isRiding, position, showDialog, dialogStep]);
+    }, [activeZone, onNavigate, showGame, nearBike, isRiding, showDialog, dialogStep]);
 
     // Check collisions & Bike Proximity
     useEffect(() => {
