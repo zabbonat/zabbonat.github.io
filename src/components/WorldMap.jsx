@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUp, ArrowDown, ArrowLeft, ArrowRight, CornerDownLeft } from 'lucide-react';
 import TenureRoadGame from './TenureRoadGame';
@@ -11,12 +11,10 @@ const WorldMap = ({ onNavigate }) => {
     const [showGame, setShowGame] = useState(false);
 
     // Ref for position to access in event handlers
-    const positionRef = React.useRef(position);
+    const positionRef = useRef(position);
     useEffect(() => {
         positionRef.current = position;
     }, [position]);
-
-    console.log("WorldMap rendering, position:", position);
 
     // Dialog State
     const [showDialog, setShowDialog] = useState(() => !sessionStorage.getItem('hasSeenWelcome'));
