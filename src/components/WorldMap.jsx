@@ -143,12 +143,11 @@ const WorldMap = ({ onNavigate }) => {
                 if (nearBike || isRiding) {
                     if (isRiding) {
                         // Dismount
-                        console.log('Dismounting via Key. Current Ref:', positionRef.current);
+                        document.body.setAttribute('data-debug-pos', JSON.stringify(positionRef.current));
                         setIsRiding(false);
                         setBikePosition({ x: positionRef.current.x, y: positionRef.current.y });
                     } else if (nearBike) {
                         // Mount
-                        console.log('Mounting via Key');
                         setIsRiding(true);
                     }
                 } else if (activeZone) {
