@@ -17,7 +17,7 @@ const WorldMap = ({ onNavigate }) => {
     }, [position]);
 
     // Dialog State
-    const [showDialog, setShowDialog] = useState(() => !sessionStorage.getItem('hasSeenWelcome_v7'));
+    const [showDialog, setShowDialog] = useState(() => !sessionStorage.getItem('hasSeenWelcome_v8'));
     const [dialogStep, setDialogStep] = useState(0);
 
     const dialogLines = [
@@ -122,7 +122,7 @@ const WorldMap = ({ onNavigate }) => {
             setDialogStep(prev => prev + 1);
         } else {
             setShowDialog(false);
-            sessionStorage.setItem('hasSeenWelcome_v6', 'true');
+            sessionStorage.setItem('hasSeenWelcome_v8', 'true');
         }
     };
 
@@ -388,7 +388,7 @@ const WorldMap = ({ onNavigate }) => {
                                     initial={{ opacity: 0, scale: 0.8, y: 10 }}
                                     animate={{ opacity: 1, scale: 1, y: 0 }}
                                     exit={{ opacity: 0, scale: 0.8, y: 10 }}
-                                    className="absolute bottom-full left-1/2 -translate-x-1/2 translate-y-2 -ml-20 w-64 bg-white border-4 border-black p-4 rounded-lg shadow-xl z-50 pointer-events-auto cursor-pointer"
+                                    className="absolute bottom-full left-1/2 -translate-x-1/2 translate-y-12 -ml-20 w-64 bg-white border-4 border-black p-4 rounded-lg shadow-xl z-50 pointer-events-auto cursor-pointer"
                                     onClick={(e) => {
                                         e.stopPropagation();
                                         advanceDialog();
