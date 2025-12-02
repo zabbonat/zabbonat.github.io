@@ -4,8 +4,21 @@ import { Github, Linkedin, Mail, FileText, Download, ExternalLink, MapPin, Clock
 const ClassicMode = ({ onSwitchToRPG }) => {
     const [activeTab, setActiveTab] = useState('home');
     const [isDarkMode, setIsDarkMode] = useState(false);
+    const [showTransition, setShowTransition] = useState(false);
 
-    const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
+    const toggleDarkMode = () => {
+        if (!isDarkMode) {
+            // Switching to Dark Mode
+            setShowTransition(true);
+            setTimeout(() => {
+                setIsDarkMode(true);
+                setShowTransition(false);
+            }, 2000);
+        } else {
+            // Switching to Light Mode
+            setIsDarkMode(false);
+        }
+    };
 
     const theme = {
         bg: isDarkMode ? 'bg-slate-950' : 'bg-white',
@@ -297,6 +310,17 @@ const ClassicMode = ({ onSwitchToRPG }) => {
 
     return (
         <div className={`min-h-screen ${theme.bg} ${theme.text} font-sans selection:bg-blue-100 transition-colors duration-300`}>
+            {/* Transition Overlay */}
+            {showTransition && (
+                <div className="fixed inset-0 z-[100] bg-black flex items-center justify-center animate-in fade-in duration-300">
+                    <img
+                        src="/dark_side2.png"
+                        alt="Transitioning to Dark Side"
+                        className="w-full h-full object-cover"
+                    />
+                </div>
+            )}
+
             {/* Header */}
             <header className={`fixed top-0 left-0 w-full ${theme.headerBg} backdrop-blur-md border-b ${theme.border} z-50 transition-colors duration-300`}>
                 <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
