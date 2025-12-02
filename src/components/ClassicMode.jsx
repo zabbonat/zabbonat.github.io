@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Github, Linkedin, Mail, FileText, Download, ExternalLink, MapPin, Clock, Lightbulb, Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const ClassicMode = ({ onSwitchToRPG }) => {
     const [activeTab, setActiveTab] = useState('home');
@@ -13,7 +14,7 @@ const ClassicMode = ({ onSwitchToRPG }) => {
             setTimeout(() => {
                 setIsDarkMode(true);
                 setShowTransition(false);
-            }, 4000);
+            }, 2000);
         } else {
             // Switching to Light Mode
             setIsDarkMode(false);
@@ -311,15 +312,31 @@ const ClassicMode = ({ onSwitchToRPG }) => {
     return (
         <div className={`min-h-screen ${theme.bg} ${theme.text} font-sans selection:bg-blue-100 transition-colors duration-300`}>
             {/* Transition Overlay */}
-            {showTransition && (
-                <div className="fixed inset-0 z-[100] bg-black flex items-center justify-center animate-in fade-in duration-300">
-                    <img
-                        src="/dark_side2.png"
-                        alt="Transitioning to Dark Side"
-                        className="w-full h-full object-cover"
-                    />
-                </div>
-            )}
+            <AnimatePresence>
+                {showTransition && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{
+                            opacity: [0, 1, 0.4, 1, 0.2, 1, 0.8, 1],
+                            scale: [0.98, 1.02, 0.99, 1, 1.01, 1],
+                            filter: ['brightness(1)', 'brightness(1.5)', 'brightness(0.8)', 'brightness(1.2)', 'brightness(1)']
+                        }}
+                        exit={{
+                            opacity: [1, 0.5, 0.8, 0.2, 0.5, 0],
+                            scale: [1, 1.05, 0.95, 1.1, 0.9],
+                            filter: ['brightness(1)', 'brightness(2)', 'brightness(0.5)', 'brightness(1.5)', 'brightness(0)']
+                        }}
+                        transition={{ duration: 0.5, ease: "easeInOut" }}
+                        className="fixed inset-0 z-[100] bg-black flex items-center justify-center"
+                    >
+                        <img
+                            src="/dark_side2.png"
+                            alt="Transitioning to Dark Side"
+                            className="w-full h-full object-cover"
+                        />
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             {/* Header */}
             <header className={`fixed top-0 left-0 w-full ${theme.headerBg} backdrop-blur-md border-b ${theme.border} z-50 transition-colors duration-300`}>
