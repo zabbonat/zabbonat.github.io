@@ -13,7 +13,7 @@ const ClassicMode = ({ onSwitchToRPG }) => {
             setTimeout(() => {
                 setIsDarkMode(true);
                 setShowTransition(false);
-            }, 2000);
+            }, 4000);
         } else {
             // Switching to Light Mode
             setIsDarkMode(false);
