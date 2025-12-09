@@ -101,6 +101,21 @@ const ClassicMode = ({ onSwitchToRPG }) => {
                                     View on Hugging Face <ExternalLink size={16} />
                                 </a>
                             </div>
+
+                            <div className={`p-6 rounded-lg border ${theme.border} hover:border-blue-300 hover:shadow-md transition-all ${theme.cardBg}`}>
+                                <h4 className={`text-xl font-semibold mb-2 ${theme.text}`}>CheckIfExists – Reference Verification Tool</h4>
+                                <p className={`${theme.textSecondary} mb-4 text-lg`}>
+                                    CheckIfExist is a powerful tool for researchers and academics to verify the authenticity of references. It cross-checks citations against the CrossRef database to detect hallucinations, verify metadata, and ensure accuracy in your bibliography.
+                                </p>
+                                <div className="flex gap-4">
+                                    <a href="https://zabbonat.github.io/References-Validation/" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-2 text-lg ${theme.accent} hover:underline`}>
+                                        Launch Tool <ExternalLink size={16} />
+                                    </a>
+                                    <a href="https://github.com/zabbonat/References-Validation" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-2 text-lg ${theme.textSecondary} hover:${theme.text}`}>
+                                        Source Code <Github size={16} />
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 );
