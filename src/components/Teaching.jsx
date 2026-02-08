@@ -134,7 +134,7 @@ const Teaching = () => {
                                     className="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-pixel text-sm px-6 py-3 rounded border-2 border-emerald-500/50 hover:border-emerald-400 transition-all group"
                                 >
                                     <Github size={18} className="group-hover:scale-110 transition-transform" />
-                                    <span>Visit DSS-ML Repository</span>
+                                    <span>Visit DSS-ML</span>
                                 </a>
                             </div>
                         </div>
