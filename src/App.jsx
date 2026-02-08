@@ -16,7 +16,7 @@ import ClassicMode from './components/ClassicMode';
 
 function App() {
   const [currentView, setCurrentView] = useState('map');
-  const [isClassicMode, setIsClassicMode] = useState(false);
+  const [isClassicMode, setIsClassicMode] = useState(true);
 
   const renderView = () => {
     switch (currentView) {
