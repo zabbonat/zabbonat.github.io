@@ -239,7 +239,7 @@ const ClassicMode = ({ onSwitchToRPG }) => {
                                     <p className={`text-base ${isDarkMode ? 'text-blue-400' : 'text-blue-700'}`}>Access lecture notes and datasets.</p>
                                 </div>
                                 <a href="https://github.com/DSS-ML" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-blue-600 text-white text-base font-medium rounded hover:bg-blue-700 transition-colors">
-                                    Visit Repository
+                                    Visit Github
                                 </a>
                             </div>
                         </div>
