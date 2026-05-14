@@ -45,7 +45,7 @@ const About = () => {
                                 </div>
                                 <div className="flex justify-between text-slate-300">
                                     <span>Level:</span>
-                                    <span className="text-yellow-400">31</span>
+                                    <span className="text-yellow-400">32</span>
                                 </div>
                                 <div className="flex justify-between text-slate-300">
                                     <span>Intelligence:</span>

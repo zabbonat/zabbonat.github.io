@@ -103,9 +103,9 @@ const ClassicMode = ({ onSwitchToRPG }) => {
                             </div>
 
                             <div className={`p-6 rounded-lg border ${theme.border} hover:border-blue-300 hover:shadow-md transition-all ${theme.cardBg}`}>
-                                <h4 className={`text-xl font-semibold mb-2 ${theme.text}`}>CheckIfExists – Reference Verification Tool</h4>
+                                <h4 className={`text-xl font-semibold mb-2 ${theme.text}`}>CheckIfExist – Reference Verification Tool</h4>
                                 <p className={`${theme.textSecondary} mb-4 text-lg`}>
-                                    CheckIfExist is a powerful tool for researchers and academics to verify the authenticity of references. It cross-checks citations against the CrossRef database to detect hallucinations, verify metadata, and ensure accuracy in your bibliography.
+                                    CheckIfExist is a tool for researchers and academics to verify the authenticity of references. It cross-checks citations against the CrossRef, Semantic Scholar, and OpenAlex databases to detect hallucinations, verify metadata, and ensure accuracy in your bibliography.
                                 </p>
                                 <div className="flex gap-4">
                                     <a href="https://zabbonat.github.io/References-Validation/" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-2 text-lg ${theme.accent} hover:underline`}>
@@ -155,6 +155,13 @@ const ClassicMode = ({ onSwitchToRPG }) => {
                                         <span className={`text-base ${theme.textMuted}`}>Abbonato, D. (2024)</span>
                                         <br />
                                         <a href="https://arxiv.org/abs/2411.14230" target="_blank" rel="noopener noreferrer" className={`text-base ${theme.accent} hover:underline`}>arXiv</a>
+                                    </li>
+                                    <li>
+                                        <strong>CheckIfExist: Detecting Citation Hallucinations in the Era of AI-Generated Content</strong>
+                                        <br />
+                                        <span className={`text-base ${theme.textMuted}`}>Abbonato, D. (2026)</span>
+                                        <br />
+                                        <a href="https://arxiv.org/abs/2602.15871" target="_blank" rel="noopener noreferrer" className={`text-base ${theme.accent} hover:underline`}>arXiv</a>
                                     </li>
                                 </ul>
                             </div>

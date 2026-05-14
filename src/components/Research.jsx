@@ -92,7 +92,7 @@ const Research = () => {
                     </motion.div>
 
 
-                    {/* CheckIfExists Tool */}
+                    {/* CheckIfExist Tool */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -106,9 +106,9 @@ const Research = () => {
                         </div>
 
                         <div className="relative z-20 p-6">
-                            <h3 className="font-pixel text-xl text-white mb-2">CheckIfExists</h3>
+                            <h3 className="font-pixel text-xl text-white mb-2">CheckIfExist</h3>
                             <p className="text-slate-300 text-sm mb-4">
-                                Reference Verification Tool. Cross-checks citations against CrossRef to detect hallucinations and ensure accuracy.
+                                Reference Verification Tool. Cross-checks citations against CrossRef, Semantic Scholar, and OpenAlex to detect hallucinations and ensure accuracy.
                             </p>
 
                             <div className="flex gap-4">

@@ -74,6 +74,16 @@ const Publications = () => {
                                     </a>
                                 </div>
                             </div>
+
+                            <div className="bg-slate-900 p-4 rounded border border-slate-700 hover:border-emerald-500 transition-colors">
+                                <h4 className="font-bold text-white text-sm mb-1">CheckIfExist: Detecting Citation Hallucinations in the Era of AI-Generated Content</h4>
+                                <p className="text-xs text-slate-400 mb-2">Abbonato, D. (2026)</p>
+                                <div className="flex justify-end">
+                                    <a href="https://arxiv.org/abs/2602.15871" target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:text-white transition-colors">
+                                        <ExternalLink size={14} />
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </motion.div>
 
